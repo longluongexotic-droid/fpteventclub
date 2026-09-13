@@ -21,10 +21,13 @@ Số liệu 14 năm, 450+ thành viên, 220+ sự kiện, 120+ đối tác do ch
 
 Thay thẻ `img` bên trong `.hero-media` bằng `video` có `autoplay muted loop playsinline`, đặt `poster="./assets/cover-k22.jpg"`. Giữ nguyên `.hero-shade` và chữ để bảo đảm nội dung dễ đọc. Với người dùng chọn giảm chuyển động, hiển thị ảnh poster.
 
-## Đưa lên tên miền
+## Xuất bản
 
-Thư mục này có thể dùng trực tiếp trên GitHub Pages hoặc hosting tĩnh. Khi đưa lên GitHub, dùng repository riêng của website FEV: thư mục cha hiện là repository dự án khác.
+Website được cấu hình để tự động triển khai thư mục `dist/` lên GitHub Pages mỗi khi nhánh `main` được cập nhật.
 
-Sau khi bật hosting, cấu hình custom domain `fpteventclub.io.vn` theo bản ghi DNS do hosting cung cấp. Canonical, Open Graph và sitemap đã dùng tên miền này. Các file mã nguồn đã sẵn sàng; tên miền chưa được kết nối chỉ bằng việc tạo những file này.
+- Repository: `https://github.com/longluongexotic-droid/fpteventclub`
+- Website: `https://longluongexotic-droid.github.io/fpteventclub/`
+
+Canonical, Open Graph và sitemap đang dùng URL GitHub Pages. Tên miền `fpteventclub.io.vn` có thể được kết nối sau bằng cấu hình custom domain và DNS.
 
 Không đưa ảnh chụp đơn hàng/hoá đơn hay dữ liệu tài khoản vào website. Trang chủ không chứa tracker hoặc biểu mẫu lưu dữ liệu cá nhân.
