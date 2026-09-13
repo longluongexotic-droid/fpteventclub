@@ -105,7 +105,7 @@ h1,h2,h3,p{margin:0}
 .text-link:hover{color:var(--purple);border-color:var(--purple)}
 .capability-header{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-top:78px;margin-bottom:23px}
 .capability-header>p:last-child{font-size:10px;line-height:1.7;color:var(--muted)}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .stat{position:relative;background:var(--ink);transition:background .25s}
 .stat[open]{background:#1d1622}
 .stat summary{display:flex;flex-direction:column;gap:16px;position:relative;min-height:235px;padding:29px 26px 27px;cursor:pointer;list-style:none}
