@@ -150,7 +150,7 @@
   }
 
   if (canObserve) {
-    const sectionIds = ['gioi-thieu', 'hanh-trinh', 'ket-noi'];
+    const sectionIds = ['gioi-thieu', 'dinh-huong', 'to-chuc', 'cot-moc', 'hanh-trinh', 'ket-noi'];
     const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
     const links = [...document.querySelectorAll('nav a[href^="#"]')]
       .filter((link) => sectionIds.includes(link.getAttribute('href').slice(1)));
