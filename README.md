@@ -26,8 +26,9 @@ Thay thẻ `img` bên trong `.hero-media` bằng `video` có `autoplay muted loo
 Website được cấu hình để tự động triển khai thư mục `dist/` lên GitHub Pages mỗi khi nhánh `main` được cập nhật.
 
 - Repository: `https://github.com/longluongexotic-droid/fpteventclub`
-- Website: `https://longluongexotic-droid.github.io/fpteventclub/`
+- Website chính: `https://fpteventclub.io.vn/`
+- GitHub Pages: `https://longluongexotic-droid.github.io/fpteventclub/`
 
-Canonical, Open Graph và sitemap đang dùng URL GitHub Pages. Tên miền `fpteventclub.io.vn` có thể được kết nối sau bằng cấu hình custom domain và DNS.
+Canonical, Open Graph, sitemap và file `CNAME` dùng tên miền chính `fpteventclub.io.vn`.
 
 Không đưa ảnh chụp đơn hàng/hoá đơn hay dữ liệu tài khoản vào website. Trang chủ không chứa tracker hoặc biểu mẫu lưu dữ liệu cá nhân.
