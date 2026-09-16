@@ -170,4 +170,40 @@
       sections.forEach((section) => sectionObserver.observe(section));
     }
   }
+
+  const yearFilters = [...document.querySelectorAll('[data-year-filter]')];
+  const eventYears = [...document.querySelectorAll('[data-events-year]')];
+
+  if (yearFilters.length && eventYears.length) {
+    const availableYears = new Set(eventYears.map((section) => section.dataset.eventsYear));
+    const yearFromHash = () => {
+      const match = window.location.hash.match(/^#nam-(\d{4})$/);
+      return match && availableYears.has(match[1]) ? match[1] : null;
+    };
+    const activateYear = (year, shouldScroll = false) => {
+      if (!availableYears.has(year)) return;
+      yearFilters.forEach((button) => {
+        const active = button.dataset.yearFilter === year;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      eventYears.forEach((section) => { section.hidden = section.dataset.eventsYear !== year; });
+      if (shouldScroll) {
+        document.querySelector('.year-switcher')?.scrollIntoView({ behavior: motion.matches ? 'auto' : 'smooth', block: 'start' });
+      }
+    };
+
+    activateYear(yearFromHash() || yearFilters[0].dataset.yearFilter);
+    yearFilters.forEach((button) => {
+      button.addEventListener('click', () => {
+        const selectedYear = button.dataset.yearFilter;
+        activateYear(selectedYear, true);
+        window.history.replaceState(null, '', `#nam-${selectedYear}`);
+      });
+    });
+    window.addEventListener('hashchange', () => {
+      const selectedYear = yearFromHash();
+      if (selectedYear) activateYear(selectedYear);
+    });
+  }
 })();
