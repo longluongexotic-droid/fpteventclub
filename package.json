@@ -1,0 +1,17 @@
+{
+  "name": "fev-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/vendor-auth.mjs && node scripts/build-static.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "vendor:auth": "node scripts/vendor-auth.mjs",
+    "preview": "node server.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.116.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8"
+  }
+}
