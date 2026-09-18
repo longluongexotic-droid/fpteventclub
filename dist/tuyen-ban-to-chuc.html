@@ -4,24 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#100d14" />
-    <meta name="description" content="Khám phá các sự kiện đang tuyển Ban Tổ chức của FEV. Đăng nhập tài khoản thành viên để đăng ký và theo dõi đơn của bạn." />
+    <meta name="description" content="Khám phá các sự kiện đang tuyển Ban Tổ chức của FEV. Đăng nhập thành viên để mở liên kết đăng ký." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:site_name" content="FPT Event Club" />
     <meta property="og:title" content="Các sự kiện đang tuyển Ban Tổ chức — FPT Event Club" />
-    <meta property="og:description" content="Khám phá các sự kiện đang tuyển Ban Tổ chức của FEV. Đăng nhập tài khoản thành viên để đăng ký và theo dõi đơn của bạn." />
+    <meta property="og:description" content="Khám phá các sự kiện đang tuyển Ban Tổ chức của FEV. Đăng nhập thành viên để mở liên kết đăng ký." />
     <meta property="og:image" content="https://fpteventclub.io.vn/assets/cover-k22.jpg" />
     <meta property="og:url" content="https://fpteventclub.io.vn/tuyen-ban-to-chuc.html" />
     <link rel="canonical" href="https://fpteventclub.io.vn/tuyen-ban-to-chuc.html" />
     <link rel="icon" href="./assets/fev-logo.png" type="image/png" />
     <link rel="preload" href="./assets/montserrat.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./styles.css?v=20260916" />
-    <link rel="stylesheet" href="./member.css?v=20260918" />
+    <link rel="stylesheet" href="./member.css?v=20260919-static1" />
     <script src="./app.js?v=20260916" defer></script>
-    <script src="./member-config.js?v=20260918" defer></script>
-    <script src="./assets/supabase.min.js?v=20260918" defer></script>
-    <script src="./member-api.js?v=20260918" defer></script>
-    <script src="./member.js?v=20260918" defer></script>
+    <script src="./member-config.js?v=20260919-static1" defer></script>
+    <script src="./member-api.js?v=20260919-static1" defer></script>
+    <script src="./member.js?v=20260919-static1" defer></script>
     <title>Các sự kiện đang tuyển Ban Tổ chức — FPT Event Club</title>
   </head>
   <body class="member-page">
@@ -37,7 +36,7 @@
           <a class="member-login" href="./dang-nhap.html" data-member-login><span class="member-icon" aria-hidden="true"></span><span>ĐĂNG NHẬP</span></a>
           <details class="member-account" data-member-account hidden>
             <summary><span class="member-icon" aria-hidden="true"></span><span data-member-name>Tài khoản</span></summary>
-            <div class="member-account-panel"><p data-member-email></p><a href="./tuyen-ban-to-chuc.html#don-dang-ky">Đơn đăng ký của tôi ↗</a><button type="button" data-member-logout>Đăng xuất</button><p class="member-account-error" data-member-account-error role="status"></p></div>
+            <div class="member-account-panel"><p data-member-email></p><a href="./tuyen-ban-to-chuc.html">Sự kiện tuyển Ban Tổ chức ↗</a><button type="button" data-member-logout>Đăng xuất</button><p class="member-account-error" data-member-account-error role="status"></p></div>
           </details>
         </div>
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="site-menu">
@@ -65,30 +64,14 @@
       <section class="recruitment-content section-shell" aria-labelledby="open-events-title">
         <div class="recruitment-section-top"><div><p class="eyebrow"><span class="square red"></span> CƠ HỘI THAM GIA</p><h2 id="open-events-title">Các sự kiện đang tuyển<br />Ban Tổ chức</h2></div><p class="recruitment-count" data-recruitment-count></p></div>
         <div class="member-gate" data-member-gate><span class="member-icon" aria-hidden="true"></span><p>Đăng nhập tài khoản thành viên để đăng ký Ban Tổ chức.</p><a href="./dang-nhap.html?next=tuyen-ban-to-chuc.html">ĐĂNG NHẬP <span aria-hidden="true">↗</span></a></div>
-        <div class="member-welcome" data-member-welcome hidden><span class="square purple"></span><p>Chào <strong data-recruitment-member></strong>. Cùng tạo nên những dấu ấn tiếp theo.</p><a href="#don-dang-ky">ĐƠN CỦA TÔI ↓</a></div>
+        <div class="member-welcome" data-member-welcome hidden><span class="square purple"></span><p>Chào <strong data-recruitment-member></strong>. Chọn một sự kiện để mở liên kết đăng ký.</p></div>
         <p class="member-form-status" data-recruitment-status role="status" aria-live="polite">Đang tải thông tin tuyển Ban Tổ chức…</p>
         <div class="recruitment-grid" data-recruitment-list></div>
         <div class="recruitment-empty" data-recruitment-empty hidden><span aria-hidden="true">✳</span><h3>Chưa có sự kiện mở tuyển</h3><p>Các đợt tuyển Ban Tổ chức mới sẽ được cập nhật tại đây.<br />Hẹn bạn ở những hành trình tiếp theo của FEV.</p><a class="text-link" href="./su-kien.html">NHÌN LẠI NHỮNG DẤU ẤN <span aria-hidden="true">↗</span></a></div>
         <noscript><p class="member-form-status">Vui lòng bật JavaScript để xem các đợt tuyển và đăng ký Ban Tổ chức.</p></noscript>
       </section>
-      <section id="don-dang-ky" class="applications-section section-shell" data-applications-section hidden aria-labelledby="applications-title">
-        <div class="recruitment-section-top"><div><p class="eyebrow"><span class="square purple"></span> HÀNH TRÌNH CỦA BẠN</p><h2 id="applications-title">Đơn đăng ký của tôi</h2></div></div>
-        <p class="member-form-status" data-applications-status role="status" aria-live="polite"></p>
-        <div class="applications-list" data-applications-list></div>
-      </section>
       <section class="member-signoff section-shell"><p class="eyebrow">FPT EVENT CLUB / THE WAY WE WENT</p><p>CÙNG LÀM NÊN<br /><em>KHOẢNH KHẮC.</em><span aria-hidden="true">↗</span></p></section>
     </main>
-    <dialog class="application-dialog" id="application-dialog" aria-labelledby="application-title">
-      <div class="application-dialog-heading"><p class="eyebrow"><span class="square purple"></span> ĐĂNG KÝ BAN TỔ CHỨC</p><button class="dialog-close" type="button" data-dialog-close aria-label="Đóng biểu mẫu">×</button></div>
-      <h2 id="application-title"></h2><p class="application-account">Đăng ký bằng tài khoản <strong data-application-email></strong></p>
-      <form id="application-form">
-        <div class="member-field"><label for="application-role">Vị trí bạn muốn tham gia</label><select id="application-role" name="role" required><option value="">Chọn vị trí</option></select></div>
-        <div class="member-field"><label for="application-motivation">Lời nhắn của bạn</label><textarea id="application-motivation" name="motivation" rows="5" required minlength="20" maxlength="2000" aria-describedby="motivation-hint" placeholder="Chia sẻ ngắn gọn lý do bạn muốn tham gia và điều bạn có thể đóng góp."></textarea><p class="member-field-hint" id="motivation-hint">Từ 20 đến 2.000 ký tự.</p></div>
-        <p class="member-form-status" data-application-status role="status" aria-live="polite"></p>
-        <button class="member-button" type="submit" data-application-submit>GỬI ĐĂNG KÝ <span aria-hidden="true">↗</span></button>
-      </form>
-      <div class="application-success" data-application-success hidden><span aria-hidden="true">✓</span><h3>Đã gửi đăng ký!</h3><p>Đơn của bạn đã được lưu. Bạn có thể xem lại trong mục “Đơn đăng ký của tôi”.</p><button class="member-button" type="button" data-dialog-close>HOÀN TẤT <span aria-hidden="true">↗</span></button></div>
-    </dialog>
     <footer class="site-footer section-shell member-footer">
       <div class="footer-top"><a class="brand" href="./" aria-label="Về trang chủ"><img src="./assets/fev-logo.png" width="76" height="44" alt="Logo FEV" loading="lazy" /><span class="brand-label">FPT EVENT CLUB<span>THE WAY WE WENT</span></span></a><div class="footer-socials"><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">FACEBOOK ↗</a><a href="https://www.instagram.com/fev_thewaywewent/" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗</a><a href="mailto:fpteventclub@gmail.com">EMAIL ↗</a></div></div>
       <div class="footer-bottom"><span>© <span id="year">2026</span> FPT EVENT CLUB.</span><span>THE WAY WE WENT.</span><a href="./">VỀ TRANG CHỦ ↗</a></div>

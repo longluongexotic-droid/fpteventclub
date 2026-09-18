@@ -4,24 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#100d14" />
-    <meta name="description" content="Đăng nhập tài khoản thành viên FEV để đăng ký Ban Tổ chức và theo dõi đơn đăng ký của bạn." />
+    <meta name="description" content="Đăng nhập thành viên FEV để mở liên kết đăng ký Ban Tổ chức các sự kiện của CLB." />
     <meta name="robots" content="noindex, nofollow" />
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:site_name" content="FPT Event Club" />
     <meta property="og:title" content="Đăng nhập thành viên — FPT Event Club" />
-    <meta property="og:description" content="Đăng nhập tài khoản thành viên FEV để đăng ký Ban Tổ chức và theo dõi đơn đăng ký của bạn." />
+    <meta property="og:description" content="Đăng nhập thành viên FEV để mở liên kết đăng ký Ban Tổ chức các sự kiện của CLB." />
     <meta property="og:image" content="https://fpteventclub.io.vn/assets/cover-k22.jpg" />
     <meta property="og:url" content="https://fpteventclub.io.vn/dang-nhap.html" />
     <link rel="canonical" href="https://fpteventclub.io.vn/dang-nhap.html" />
     <link rel="icon" href="./assets/fev-logo.png" type="image/png" />
     <link rel="preload" href="./assets/montserrat.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./styles.css?v=20260916" />
-    <link rel="stylesheet" href="./member.css?v=20260918" />
+    <link rel="stylesheet" href="./member.css?v=20260919-static1" />
     <script src="./app.js?v=20260916" defer></script>
-    <script src="./member-config.js?v=20260918" defer></script>
-    <script src="./assets/supabase.min.js?v=20260918" defer></script>
-    <script src="./member-api.js?v=20260918" defer></script>
-    <script src="./member.js?v=20260918" defer></script>
+    <script src="./member-config.js?v=20260919-static1" defer></script>
+    <script src="./member-api.js?v=20260919-static1" defer></script>
+    <script src="./member.js?v=20260919-static1" defer></script>
     <title>Đăng nhập thành viên — FPT Event Club</title>
   </head>
   <body class="member-page login-page">
@@ -37,7 +36,7 @@
           <a class="member-login" href="./dang-nhap.html" data-member-login><span class="member-icon" aria-hidden="true"></span><span>ĐĂNG NHẬP</span></a>
           <details class="member-account" data-member-account hidden>
             <summary><span class="member-icon" aria-hidden="true"></span><span data-member-name>Tài khoản</span></summary>
-            <div class="member-account-panel"><p data-member-email></p><a href="./tuyen-ban-to-chuc.html#don-dang-ky">Đơn đăng ký của tôi ↗</a><button type="button" data-member-logout>Đăng xuất</button><p class="member-account-error" data-member-account-error role="status"></p></div>
+            <div class="member-account-panel"><p data-member-email></p><a href="./tuyen-ban-to-chuc.html">Sự kiện tuyển Ban Tổ chức ↗</a><button type="button" data-member-logout>Đăng xuất</button><p class="member-account-error" data-member-account-error role="status"></p></div>
           </details>
         </div>
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="site-menu">
@@ -73,6 +72,7 @@
           <p class="member-form-status" id="login-status" role="status" aria-live="polite"></p>
           <button class="member-button" type="submit" data-login-submit disabled>ĐĂNG NHẬP <span aria-hidden="true">↗</span></button>
         </form>
+        <p class="member-field-hint">Đăng nhập đơn giản trên trình duyệt, không dùng để bảo vệ dữ liệu riêng tư.</p>
         <p class="member-help">Chưa có tài khoản hoặc cần hỗ trợ?<br /><a href="mailto:fpteventclub@gmail.com">Liên hệ FPT Event Club <span aria-hidden="true">↗</span></a></p>
         <noscript><p class="member-form-status">Vui lòng bật JavaScript để đăng nhập tài khoản thành viên.</p></noscript>
       </section>

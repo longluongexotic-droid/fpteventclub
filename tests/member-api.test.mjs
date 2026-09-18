@@ -1,67 +1,81 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
+import { createHash, pbkdf2Sync, webcrypto } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 
 const source = await readFile(new URL('../member-api.js', import.meta.url), 'utf8');
-function adapter(sdk, config = { supabaseUrl: 'https://project.example', publishableKey: 'public-test-key' }) {
-  const window = { FEV_MEMBER_CONFIG: config, supabase: { createClient: () => sdk } };
-  vm.runInNewContext(source, { window, URL, Error });
-  return window.FEVMemberBackend;
-}
-function client({ authError = null, member = { active: true, display_name: 'Test member' } } = {}) {
-  const calls = [];
-  const authUser = { id: 'member-id', email: 'member@example.test' };
-  const sdk = {
-    auth: {
-      async getSession() { calls.push('getSession'); return { data: { session: { access_token: 'untrusted-local-token' } } }; },
-      async getUser() { calls.push('getUser'); return { data: { user: authError ? null : authUser }, error: authError }; },
-      async signInWithPassword() { return { data: { user: authUser }, error: authError }; },
-      async signOut() { calls.push('signOut'); return {}; }
-    },
-    from(table) {
-      assert.equal(table, 'fev_members');
-      return { select() { return this; }, eq() { return this; }, async maybeSingle() { return { data: member }; } };
-    },
-    async rpc(name, args) {
-      calls.push({ name, args });
-      return { data: { id: 'application-id', event_id: args.p_event_id, event_title: 'Test event', role: args.p_role, motivation: args.p_motivation, status: 'submitted' } };
+const email = 'member@example.test';
+const password = 'local-test-only';
+const config = { accounts: [{ id: 'test-member', emailHash: createHash('sha256').update(email).digest('hex'), salt: 'test-salt', passwordHash: pbkdf2Sync(password, 'test-salt', 210000, 32, 'sha256').toString('hex') }], events: [] };
+function adapter(settings = config, storage = new Map(), blockStorage = false) {
+  const window = {
+    FEV_MEMBER_CONFIG: settings, crypto: webcrypto,
+    sessionStorage: {
+      getItem: (key) => storage.get(key) ?? null,
+      setItem: (key, value) => { if (blockStorage) throw Error('blocked'); storage.set(key, value); },
+      removeItem: (key) => storage.delete(key)
     }
   };
-  return { sdk, calls };
+  vm.runInNewContext(source, { window, TextEncoder, Uint8Array, Error });
+  return { backend: window.FEVMemberBackend, storage };
 }
+const login = (backend, fields = {}) => backend.request('/auth/login', { method: 'POST', body: JSON.stringify({ email, password, ...fields }) });
 
-test('Unconfigured portal fails closed without creating an authentication client', async () => {
-  const backend = adapter(null, {});
+test('Visitors have no session and can read the public empty event list', async () => {
+  const { backend } = adapter();
+  assert.equal((await backend.request('/auth/me')).user, null);
+  assert.equal((await backend.request('/recruitment')).events.length, 0);
+});
+
+test('Valid local credentials log in, normalize email, and never store a password', async () => {
+  const { backend, storage } = adapter();
+  const result = await login(backend, { email: '  MEMBER@EXAMPLE.TEST  ' });
+  assert.equal(result.user.email, email);
+  assert.equal((await backend.request('/auth/me')).user.id, 'test-member');
+  assert.equal([...storage.values()].join('').includes(password), false);
+  assert.equal((await adapter(config, storage).backend.request('/auth/me')).user.email, email);
+});
+
+test('Wrong passwords and unknown emails are rejected with the same message', async () => {
+  const { backend } = adapter();
+  for (const fields of [{ password: 'wrong' }, { email: 'unknown@example.test' }, { password: '' }]) {
+    await assert.rejects(login(backend, fields), (error) => error.status === 401 && error.message === 'Email hoặc mật khẩu không đúng.');
+  }
+  assert.equal((await backend.request('/auth/me')).user, null);
+});
+
+test('Logout removes the local session', async () => {
+  const { backend, storage } = adapter();
+  await login(backend);
+  await backend.request('/auth/logout', { method: 'POST' });
+  assert.equal(storage.size, 0);
+  assert.equal((await backend.request('/auth/me')).user, null);
+});
+
+test('Expired, malformed and unrecognized browser sessions are cleared', async () => {
+  const storage = new Map();
+  const { backend } = adapter(config, storage);
+  const sessions = ['broken JSON', JSON.stringify({ version: 1, user: { id: 'test-member', email }, expiresAt: Date.now() - 1 }), JSON.stringify({ version: 1, user: { id: 'other', email }, expiresAt: Date.now() + 10000 })];
+  for (const session of sessions) {
+    storage.set('fev-local-member-v1', session);
+    assert.equal((await backend.request('/auth/me')).user, null);
+    assert.equal(storage.size, 0);
+  }
+});
+
+test('Blocked browser storage returns an actionable error, not a successful login', async () => {
+  await assert.rejects(login(adapter(config, new Map(), true).backend), (error) => error.code === 'STORAGE_UNAVAILABLE');
+});
+
+test('Missing account configuration rejects login', async () => {
+  const { backend } = adapter({});
   assert.equal(backend.configured, false);
-  await assert.rejects(backend.request('/auth/login', { method: 'POST', body: '{}' }), error => error.code === 'BACKEND_NOT_CONFIGURED');
-  await assert.rejects(backend.request('/applications', { method: 'POST', body: '{}' }), error => error.code === 'BACKEND_NOT_CONFIGURED');
+  await assert.rejects(login(backend), (error) => error.code === 'INVALID_CREDENTIALS');
 });
 
-test('A forged local session does not become a logged-in member', async () => {
-  const { sdk, calls } = client({ authError: { status: 401 } });
-  const response = await adapter(sdk).request('/auth/me');
-  assert.equal(response.user, null);
-  assert.deepEqual(calls, ['getSession','getUser','signOut']);
-});
-
-test('Successful password authentication still requires an active membership', async () => {
-  const { sdk, calls } = client({ member: null });
-  await assert.rejects(adapter(sdk).request('/auth/login', { method: 'POST', body: { email: 'member@example.test', password: 'local-test-only' } }), error => error.status === 403 && error.code === 'FEV_NOT_MEMBER');
-  assert.ok(calls.includes('signOut'));
-});
-
-test('Unknown account and incorrect password do not disclose account existence', async () => {
-  const { sdk } = client({ authError: { status: 400, message: 'Potentially sensitive provider error' } });
-  await assert.rejects(adapter(sdk).request('/auth/login', { method: 'POST', body: { email: 'member@example.test', password: 'local-test-only' } }), error => error.message === 'Email hoặc mật khẩu không đúng.');
-});
-
-test('Application submission rechecks server authentication and ignores client supplied ownership', async () => {
-  const { sdk, calls } = client();
-  const result = await adapter(sdk).request('/applications', { method: 'POST', body: JSON.stringify({ eventId: 'event-id', role: 'Nội dung', motivation: 'Một lời nhắn đầy đủ cho sự kiện.', userId: 'victim-id' }) });
-  assert.equal(result.application.eventId,'event-id');
-  assert.equal(result.application.eventTitle,'Test event');
-  assert.deepEqual(calls.slice(0,2), ['getSession','getUser']);
-  assert.equal(calls[2].name,'fev_submit_application');
-  assert.deepEqual(Object.keys(calls[2].args).sort(), ['p_event_id','p_motivation','p_role']);
+test('No fake registration submission is accepted without a receiving service', async () => {
+  const { backend } = adapter();
+  await login(backend);
+  await assert.rejects(backend.request('/applications', { method: 'POST', body: {} }), (error) => error.code === 'NOT_FOUND');
 });
