@@ -1,0 +1,63 @@
+/* Admin workspace uses the public FEV palette, typography and component rhythm. */
+.admin-page [hidden]{display:none!important}
+.admin-hero{padding-top:170px;padding-bottom:53px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.admin-hero::after{content:"✳";position:absolute;right:4%;top:105px;font-size:320px;line-height:1;color:#bb9aec0e;pointer-events:none}
+.admin-hero h1{font-size:clamp(43px,6vw,86px);font-weight:780;line-height:1.04;letter-spacing:-.06em;margin-top:26px}
+.admin-hero h1 em{color:var(--purple);font-weight:650}
+.admin-hero>p:last-child{font-size:13px;line-height:1.9;color:var(--muted);margin-top:27px}
+.admin-access{padding-top:28px;padding-bottom:28px;font-size:12px;line-height:1.8;color:var(--muted)}
+.admin-access a{display:inline-block;margin-top:12px;color:var(--purple);font-size:10px;font-weight:700;letter-spacing:1px}
+.admin-section{padding-top:40px;padding-bottom:65px;border-top:1px solid var(--line)}
+.admin-section-heading{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:28px}
+.admin-section-heading h2{font-size:clamp(29px,3.5vw,49px);font-weight:650;letter-spacing:-.05em;margin-top:17px}
+.admin-section-heading>div>p:last-child{font-size:11px;color:var(--muted);margin-top:10px}
+.admin-primary{width:auto;min-width:190px;flex:0 0 auto}
+.admin-controls{display:flex;align-items:center;gap:10px 15px;padding:19px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:28px}
+.admin-controls label{font-size:10px;font-weight:650;letter-spacing:.6px;color:var(--muted);white-space:nowrap}
+.admin-controls input,.admin-controls select{min-height:41px;padding:9px 12px;border:1px solid #ffffff35;background:#1a1420;color:var(--paper);font:inherit;font-size:12px;color-scheme:dark}
+.admin-controls input{width:min(360px,100%)}
+.admin-controls select{min-width:150px}
+.admin-event-list,.admin-application-list{display:grid;gap:16px}
+.admin-event-card,.admin-application-card{padding:24px;border:1px solid var(--line);background:#1a1420}
+.admin-event-head,.admin-application-head{display:flex;justify-content:space-between;align-items:start;gap:20px}
+.admin-event-card h3,.admin-application-card h3{font-size:22px;line-height:1.35;letter-spacing:-.03em;overflow-wrap:anywhere}
+.admin-card-meta{font-size:11px;line-height:1.8;color:var(--muted);margin-top:9px;overflow-wrap:anywhere}
+.admin-tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end}
+.admin-tag{display:inline-block;padding:6px 9px;border:1px solid #ffffff31;color:var(--muted);font-size:9px;white-space:nowrap}
+.admin-tag.is-live{border-color:#bb9aec73;color:var(--purple)}
+.admin-tag.is-open{border-color:#ff4d676b;color:#ff9bad}
+.admin-card-description{font-size:12px;line-height:1.75;color:var(--muted);margin-top:16px;white-space:pre-line;overflow-wrap:anywhere}
+.admin-card-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:21px}
+.admin-card-actions button,.admin-text-button{min-height:37px;padding:9px 13px;border:1px solid #bb9aec68;color:var(--purple);background:#bb9aec0a;font-size:10px;font-weight:700;letter-spacing:.6px}
+.admin-card-actions button:hover,.admin-text-button:hover{background:#bb9aec1e}
+.admin-card-actions .admin-danger{border-color:#e6757866;color:#f6a6ac;background:#d84d5910}
+.admin-card-actions button:disabled{opacity:.5;cursor:wait}
+.admin-empty{padding:45px 20px;text-align:center;border:1px solid var(--line);font-size:12px;color:var(--muted)}
+.admin-application-contact{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:17px;font-size:11px;line-height:1.7;color:var(--muted)}
+.admin-application-contact a{color:var(--paper);text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.admin-status-row{display:flex;flex-wrap:wrap;align-items:end;gap:11px;margin-top:20px;padding-top:19px;border-top:1px solid var(--line)}
+.admin-status-row label{font-size:10px;color:var(--muted);font-weight:650}
+.admin-status-row select{display:block;min-width:160px;min-height:39px;margin-top:7px;padding:8px 10px;background:#100d14;border:1px solid #ffffff35;color:var(--paper);font:inherit;font-size:11px;color-scheme:dark}
+.admin-status-row button{min-height:39px;padding:9px 14px;background:var(--purple);color:#21122d;font-size:10px;font-weight:750;letter-spacing:.6px}
+.admin-status-row .admin-danger{margin-left:auto;background:none;border:1px solid #e6757866;color:#f6a6ac}
+.admin-item-status{width:100%;margin-top:9px}
+.admin-event-dialog{width:min(760px,calc(100% - 32px))}
+.admin-event-dialog h2{margin-bottom:4px}
+.admin-form-row{display:grid;grid-template-columns:1fr 1.3fr 1.2fr;gap:14px}
+.admin-check-row{display:flex;flex-wrap:wrap;gap:13px 27px;margin-top:27px}
+.admin-check-row label,.admin-departments label{display:flex;align-items:center;gap:9px;font-size:11px;line-height:1.6;color:var(--paper);cursor:pointer}
+.admin-check-row input,.admin-departments input{accent-color:var(--purple);width:16px;height:16px;flex:none}
+.admin-departments{display:flex;flex-wrap:wrap;gap:12px 20px;border:1px solid #ffffff35;padding:16px;margin-top:20px}
+.admin-departments legend{font-size:11px;font-weight:600;padding:0 7px}
+.admin-dialog-actions{display:flex;align-items:center;gap:14px;margin-top:26px}
+.admin-dialog-actions .member-button{width:auto;min-width:190px}
+.admin-dialog-actions .admin-text-button{border-color:transparent;background:none;color:var(--muted)}
+.admin-event-dialog .member-form-status{margin-top:9px}
+@media(max-width:760px){
+  .admin-hero{padding-top:135px;padding-bottom:36px}.admin-hero::after{font-size:240px;right:-50px;top:90px}.admin-hero h1{font-size:clamp(38px,9.5vw,65px)}
+  .admin-section{padding-top:31px;padding-bottom:45px}.admin-section-heading{align-items:start;flex-direction:column}.admin-primary{width:100%}
+  .admin-controls{flex-wrap:wrap}.admin-controls label{width:100%}.admin-controls input,.admin-controls select{width:100%;min-width:0}
+  .admin-event-card,.admin-application-card{padding:19px}.admin-event-head,.admin-application-head{display:block}.admin-tags{justify-content:flex-start;margin-top:14px}.admin-event-card h3,.admin-application-card h3{font-size:20px}
+  .admin-form-row{grid-template-columns:1fr}.admin-form-row .member-field{margin-top:18px}.admin-dialog-actions{flex-wrap:wrap}.admin-dialog-actions .member-button{width:100%}
+  .admin-status-row .admin-danger{margin-left:0}
+}

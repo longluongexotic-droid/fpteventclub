@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#100d14" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Quản trị — FPT Event Club</title>
+    <link rel="icon" href="./assets/fev-logo.png" type="image/png" />
+    <link rel="preload" href="./assets/montserrat.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css?v=20260916" />
+    <link rel="stylesheet" href="./member.css" />
+    <link rel="stylesheet" href="./admin.css" />
+    <script src="./app.js?v=20260916" defer></script>
+    <script type="module" src="./member.js"></script>
+    <script type="module" src="./admin.js"></script>
+  </head>
+  <body class="member-page admin-page">
+    <a class="skip-link" href="#noi-dung">Đến nội dung chính</a>
+    <header class="site-header" data-header>
+      <a class="brand" href="./" aria-label="FPT Event Club — Trang chủ"><img src="./assets/fev-logo.png" width="85" height="49" alt="Logo FEV" /><span class="brand-label">FPT EVENT CLUB<span>THE WAY WE WENT</span></span></a>
+      <div class="header-right">
+        <a class="header-contact" href="./#ket-noi">CÙNG TẠO DẤU ẤN <span aria-hidden="true">↗</span></a>
+        <div class="member-access" data-member-access>
+          <a class="member-login" href="./dang-nhap.html?next=quan-tri.html" data-member-login><span class="member-icon" aria-hidden="true"></span><span>ĐĂNG NHẬP</span></a>
+          <details class="member-account" data-member-account hidden>
+            <summary><span class="member-icon" aria-hidden="true"></span><span data-member-name>Tài khoản</span></summary>
+            <div class="member-account-panel"><p data-member-email></p><a href="./tuyen-ban-to-chuc.html">Sự kiện tuyển Ban Tổ chức ↗</a><button type="button" data-member-logout>Đăng xuất</button><p class="member-account-error" data-member-account-error role="status"></p></div>
+          </details>
+        </div>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="site-menu"><span class="menu-label">KHÁM PHÁ</span><span class="menu-lines" aria-hidden="true"><i></i><i></i></span></button>
+      </div>
+    </header>
+    <nav class="site-menu" id="site-menu" aria-label="Điều hướng chính" hidden>
+      <div class="menu-inner">
+        <p class="eyebrow"><span class="square"></span> KHÔNG GIAN FEV</p>
+        <a class="menu-link" href="./"><span>01</span> Tổng quan FEV <span aria-hidden="true">↗</span></a>
+        <a class="menu-link" href="./#hanh-trinh"><span>02</span> Thế hệ tiếp nối <span aria-hidden="true">↗</span></a>
+        <a class="menu-link" href="./su-kien.html"><span>03</span> Các sự kiện gần đây <span aria-hidden="true">↗</span></a>
+        <a class="menu-link menu-link-recruitment" href="./tuyen-ban-to-chuc.html"><span>04</span> Các sự kiện đang tuyển Ban Tổ chức <span aria-hidden="true">↗</span></a>
+        <div class="menu-footer"><span>THE WAY WE WENT.</span><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">FACEBOOK ↗</a><a href="mailto:fpteventclub@gmail.com">EMAIL ↗</a></div>
+      </div>
+    </nav>
+    <main id="noi-dung">
+      <section class="admin-hero section-shell" aria-labelledby="admin-title">
+        <p class="eyebrow"><span class="square purple"></span> FEV / QUẢN TRỊ NỘI DUNG</p>
+        <h1 id="admin-title">DẤU ẤN FEV.<br /><em>TRONG TẦM TAY.</em></h1>
+        <p>Quản lý kho sự kiện và hành trình ứng tuyển Ban Tổ chức.</p>
+      </section>
+      <div class="admin-access section-shell" data-admin-access role="status" aria-live="polite">
+        <p data-admin-access-message>Đang kiểm tra quyền quản trị…</p>
+        <a href="./dang-nhap.html?next=quan-tri.html" data-admin-login hidden>ĐĂNG NHẬP QUẢN TRỊ ↗</a>
+      </div>
+      <div data-admin-dashboard hidden>
+        <section class="admin-section section-shell" id="quan-ly-su-kien" aria-labelledby="admin-events-title">
+          <div class="admin-section-heading"><div><p class="eyebrow"><span class="square red"></span> NỘI DUNG WEBSITE</p><h2 id="admin-events-title">Quản lý sự kiện</h2><p data-admin-events-count></p></div><button class="member-button admin-primary" type="button" data-event-new>THÊM SỰ KIỆN <span aria-hidden="true">↗</span></button></div>
+          <div class="admin-controls"><label for="admin-event-search">Tìm sự kiện</label><input id="admin-event-search" type="search" placeholder="Tên sự kiện…" autocomplete="off" /><label for="admin-event-year">Năm</label><select id="admin-event-year"><option value="">Tất cả</option></select></div>
+          <p class="member-form-status" data-admin-events-status role="status" aria-live="polite"></p>
+          <div class="admin-event-list" data-admin-events-list></div>
+          <p class="admin-empty" data-admin-events-empty hidden>Chưa có sự kiện nào.</p>
+        </section>
+        <section class="admin-section section-shell" id="quan-ly-don" aria-labelledby="admin-applications-title">
+          <div class="admin-section-heading"><div><p class="eyebrow"><span class="square purple"></span> TUYỂN BAN TỔ CHỨC</p><h2 id="admin-applications-title">Đơn ứng tuyển</h2><p data-admin-applications-count></p></div></div>
+          <div class="admin-controls"><label for="admin-application-search">Tìm ứng viên</label><input id="admin-application-search" type="search" placeholder="Tên, MSSV hoặc sự kiện…" autocomplete="off" /><label for="admin-application-status-filter">Trạng thái</label><select id="admin-application-status-filter"><option value="">Tất cả</option><option>Đã nhận</option><option>Đang duyệt</option><option>Phỏng vấn</option><option>Trúng tuyển</option><option>Từ chối</option></select></div>
+          <p class="member-form-status" data-admin-applications-status role="status" aria-live="polite"></p>
+          <div class="admin-application-list" data-admin-applications-list></div>
+          <p class="admin-empty" data-admin-applications-empty hidden>Chưa có đơn ứng tuyển nào.</p>
+        </section>
+      </div>
+    </main>
+    <dialog class="application-dialog admin-event-dialog" data-event-dialog aria-labelledby="admin-event-form-title">
+      <div class="application-dialog-heading"><p class="eyebrow"><span class="square purple"></span> KHO SỰ KIỆN FEV</p><button class="dialog-close" type="button" data-event-close aria-label="Đóng form sự kiện">×</button></div>
+      <h2 id="admin-event-form-title" data-event-dialog-title>Thêm sự kiện</h2>
+      <form id="admin-event-form" method="post">
+        <div class="member-field"><label for="admin-title-input">Tên sự kiện</label><input id="admin-title-input" name="title" required maxlength="180" /></div>
+        <div class="admin-form-row"><div class="member-field"><label for="admin-year-input">Năm</label><input id="admin-year-input" name="year" type="number" min="2000" max="2100" required /></div><div class="member-field"><label for="admin-category-input">Loại sự kiện</label><select id="admin-category-input" name="category"><option value="">Chưa phân loại</option><option>Nội bộ</option><option>Cấp trường</option><option>Toàn thành phố</option></select></div><div class="member-field"><label for="admin-order-input">Thứ tự hiển thị</label><input id="admin-order-input" name="display_order" type="number" min="1" placeholder="Tự động" /></div></div>
+        <div class="member-field"><label for="admin-description-input">Mô tả</label><textarea id="admin-description-input" name="description" maxlength="10000" rows="5"></textarea></div>
+        <div class="member-field"><label for="admin-cover-input">Ảnh bìa</label><input id="admin-cover-input" name="cover_image" maxlength="2048" placeholder="https://... hoặc ./assets/..." /><p class="member-field-hint">Dùng URL HTTPS hoặc đường dẫn ảnh trong website.</p></div>
+        <div class="member-field"><label for="admin-link-input">Link đăng ký sự kiện</label><input id="admin-link-input" name="registration_link" type="url" maxlength="2048" placeholder="https://..." /><p class="member-field-hint">Chỉ thành viên được quyền đọc link này. Để trống nếu sự kiện chưa có link.</p><p class="member-form-status" data-event-link-status role="status"></p></div>
+        <div class="admin-check-row"><label><input id="admin-published-input" name="is_published" type="checkbox" checked /> Công khai trên website</label><label><input id="admin-recruiting-input" name="is_recruiting" type="checkbox" /> Đang tuyển Ban Tổ chức</label></div>
+        <div class="member-field" data-recruitment-fields hidden><label for="admin-deadline-input">Hạn nhận đơn</label><input id="admin-deadline-input" name="application_deadline" type="datetime-local" /><p class="member-field-hint">Giờ hiển thị theo múi giờ trên thiết bị của bạn.</p><fieldset class="admin-departments"><legend>Các ban cần tuyển</legend><label><input type="checkbox" name="department" value="Nội dung" /> Nội dung</label><label><input type="checkbox" name="department" value="Hậu cần" /> Hậu cần</label><label><input type="checkbox" name="department" value="Kỹ thuật" /> Kỹ thuật</label><label><input type="checkbox" name="department" value="Truyền thông" /> Truyền thông</label><label><input type="checkbox" name="department" value="Đối ngoại" /> Đối ngoại</label></fieldset></div>
+        <p class="member-form-status" data-event-form-status role="status" aria-live="polite"></p>
+        <div class="admin-dialog-actions"><button class="member-button" type="submit" data-event-save>LƯU SỰ KIỆN <span aria-hidden="true">↗</span></button><button class="admin-text-button" type="button" data-event-cancel>Hủy</button></div>
+      </form>
+    </dialog>
+    <footer class="site-footer section-shell member-footer"><div class="footer-top"><a class="brand" href="./" aria-label="Về trang chủ"><img src="./assets/fev-logo.png" width="76" height="44" alt="Logo FEV" loading="lazy" /><span class="brand-label">FPT EVENT CLUB<span>THE WAY WE WENT</span></span></a><div class="footer-socials"><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">FACEBOOK ↗</a><a href="mailto:fpteventclub@gmail.com">EMAIL ↗</a></div></div><div class="footer-bottom"><span>© <span id="year">2026</span> FPT EVENT CLUB.</span><span>THE WAY WE WENT.</span><a href="./">VỀ TRANG CHỦ ↗</a></div></footer>
+  </body>
+</html>

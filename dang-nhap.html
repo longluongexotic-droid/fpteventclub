@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#100d14" />
-    <meta name="description" content="Đăng nhập thành viên FEV để mở liên kết đăng ký Ban Tổ chức các sự kiện của CLB." />
+    <meta name="description" content="Đăng nhập Google sinh viên FPT hoặc tài khoản quản trị FEV để ứng tuyển Ban Tổ chức." />
     <meta name="robots" content="noindex, nofollow" />
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:site_name" content="FPT Event Club" />
@@ -16,11 +16,9 @@
     <link rel="icon" href="./assets/fev-logo.png" type="image/png" />
     <link rel="preload" href="./assets/montserrat.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./styles.css?v=20260916" />
-    <link rel="stylesheet" href="./member.css?v=20260919-static1" />
+    <link rel="stylesheet" href="./member.css?v=20261001-supabase1" />
     <script src="./app.js?v=20260916" defer></script>
-    <script src="./member-config.js?v=20260919-static1" defer></script>
-    <script src="./member-api.js?v=20260919-static1" defer></script>
-    <script src="./member.js?v=20260919-static1" defer></script>
+    <script type="module" src="./member.js"></script>
     <title>Đăng nhập thành viên — FPT Event Club</title>
   </head>
   <body class="member-page login-page">
@@ -62,17 +60,19 @@
         <div class="login-visual" aria-hidden="true"><span>FEV</span><b>✳</b><p>THE WAY WE WENT.</p></div>
       </section>
       <section class="login-card" aria-labelledby="login-form-title">
-        <p class="eyebrow"><span class="square red"></span> DÀNH CHO THÀNH VIÊN</p>
+        <p class="eyebrow"><span class="square red"></span> CỔNG THÀNH VIÊN FEV</p>
         <h2 id="login-form-title">Chào mừng trở lại.</h2>
-        <p class="login-card-intro">Sử dụng tài khoản thành viên được CLB cấp.</p>
+        <p class="login-card-intro">Dùng email sinh viên FPT để xác thực. Quyền thành viên do CLB cấp sau khi xác nhận.</p>
         <div class="member-session-notice" data-login-current hidden><p>Bạn đã đăng nhập với tài khoản <strong data-login-current-name></strong>.</p><a class="member-button" data-login-continue href="./tuyen-ban-to-chuc.html">TIẾP TỤC <span aria-hidden="true">↗</span></a></div>
+        <button class="member-button google-login-button" type="button" data-google-login>ĐĂNG NHẬP VỚI GOOGLE FPT <span aria-hidden="true">↗</span></button>
+        <p class="member-form-status" id="login-status" role="status" aria-live="polite"></p>
+        <p class="login-divider"><span>HOẶC TÀI KHOẢN QUẢN TRỊ</span></p>
         <form id="member-login-form" method="post">
-          <div class="member-field"><label for="member-email">Email thành viên</label><input id="member-email" name="email" type="email" autocomplete="username" placeholder="Email của bạn" inputmode="email" autocapitalize="none" spellcheck="false" required maxlength="254" /></div>
+          <div class="member-field"><label for="member-email">Email quản trị</label><input id="member-email" name="email" type="email" autocomplete="username" placeholder="Email của bạn" inputmode="email" autocapitalize="none" spellcheck="false" required maxlength="254" /></div>
           <div class="member-field"><label for="member-password">Mật khẩu</label><div class="password-field"><input id="member-password" name="password" type="password" autocomplete="current-password" placeholder="Nhập mật khẩu" required maxlength="256" /><button type="button" data-password-toggle aria-label="Hiện mật khẩu" aria-pressed="false">HIỆN</button></div></div>
-          <p class="member-form-status" id="login-status" role="status" aria-live="polite"></p>
           <button class="member-button" type="submit" data-login-submit disabled>ĐĂNG NHẬP <span aria-hidden="true">↗</span></button>
         </form>
-        <p class="member-field-hint">Đăng nhập đơn giản trên trình duyệt, không dùng để bảo vệ dữ liệu riêng tư.</p>
+        <p class="member-field-hint">Tài khoản quản trị được Ban Chủ nhiệm cấp riêng. Không có chức năng tự đăng ký mật khẩu.</p>
         <p class="member-help">Chưa có tài khoản hoặc cần hỗ trợ?<br /><a href="mailto:fpteventclub@gmail.com">Liên hệ FPT Event Club <span aria-hidden="true">↗</span></a></p>
         <noscript><p class="member-form-status">Vui lòng bật JavaScript để đăng nhập tài khoản thành viên.</p></noscript>
       </section>

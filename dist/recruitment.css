@@ -1,0 +1,18 @@
+/* Recruitment page additions, using the existing FEV member palette and type scale. */
+.recruitment-content [hidden],
+.applications-section[hidden],
+.application-dialog [hidden],
+.member-gate a[hidden]{display:none!important}
+.applications-section .recruitment-section-top{margin-bottom:24px}
+.applications-section .member-form-status{margin-bottom:18px}
+.application-item-meta{grid-column:1}
+.application-dialog .field-optional{color:var(--muted);font-weight:400}
+.application-dialog input[readonly]{background:#19141f;color:#c5b8ce;cursor:default}
+.application-dialog #application-email:focus{outline:none}
+.application-dialog .application-success[hidden],
+.application-dialog #application-form[hidden]{display:none!important}
+.application-success .member-button{margin-top:10px}
+@media(max-width:760px){
+  .application-item-meta{grid-column:1}
+  .application-dialog{max-height:calc(100dvh - 24px)}
+}

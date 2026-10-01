@@ -1,239 +1,267 @@
-(() => {
-  'use strict';
+import { supabase, isSupabaseConfigured } from './supabase-client.js';
 
-  const select = (query) => document.querySelector(query);
-  const all = (query) => [...document.querySelectorAll(query)];
-  const loginForm = select('#member-login-form');
-  const recruitmentList = select('[data-recruitment-list]');
-  const recruitmentUrl = new URL('./tuyen-ban-to-chuc.html', window.location.href);
-  const state = { user: null, events: [], sessionChecking: true };
-  const dateFormatter = new Intl.DateTimeFormat('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+const select = (selector) => document.querySelector(selector);
+const all = (selector) => [...document.querySelectorAll(selector)];
+const loginForm = select('#member-login-form');
+const loginStatus = select('#login-status');
+const googleButton = select('[data-google-login]');
+const submitButton = select('[data-login-submit]');
+const allowedDestinations = [
+  new URL('./', import.meta.url).pathname,
+  new URL('./su-kien.html', import.meta.url).pathname,
+  new URL('./tuyen-ban-to-chuc.html', import.meta.url).pathname,
+  new URL('./quan-tri.html', import.meta.url).pathname,
+];
+let currentUser = null;
+let currentProfile = null;
+let oauthNext = null;
+let oauthCallbackPending = Boolean(loginForm && new URLSearchParams(location.search).has('code'));
 
-  function status(element, message = '', kind = '') {
-    if (!element) return;
-    element.textContent = message;
-    element.dataset.kind = kind;
-  }
+function showStatus(message = '', kind = '') {
+  if (!loginStatus) return;
+  loginStatus.textContent = message;
+  loginStatus.dataset.kind = kind;
+}
 
-  function element(tag, className, text) {
-    const node = document.createElement(tag);
-    if (className) node.className = className;
-    if (text !== undefined) node.textContent = text;
-    return node;
-  }
+function returnTarget() {
+  const candidate = new URLSearchParams(location.search).get('next') || oauthNext;
+  const fallback = new URL('./tuyen-ban-to-chuc.html', import.meta.url);
+  if (!candidate) return fallback;
+  try {
+    const target = new URL(candidate, location.href);
+    if (target.origin === location.origin && allowedDestinations.includes(target.pathname) &&
+        !target.username && !target.password) return target;
+  } catch { /* Ignore invalid and external next URLs. */ }
+  return fallback;
+}
 
-  function dateLabel(value) {
-    if (!value) return '';
-    const parsed = new Date(value);
-    return Number.isNaN(parsed.getTime()) ? '' : dateFormatter.format(parsed);
-  }
+function avatarUrl(user, profile) {
+  try {
+    const url = new URL(profile?.avatar_url || user?.user_metadata?.avatar_url || '');
+    return url.protocol === 'https:' && !url.username && !url.password ? url.href : '';
+  } catch { return ''; }
+}
 
-  function returnTarget() {
-    const candidate = new URLSearchParams(window.location.search).get('next');
-    if (!candidate) return recruitmentUrl.href;
-    try {
-      const target = new URL(candidate, window.location.href);
-      // Only the local recruitment page is a supported post-login destination.
-      if (target.origin === window.location.origin && target.pathname === recruitmentUrl.pathname && !target.username && !target.password) {
-        return target.href;
-      }
-    } catch { /* Ignore invalid return URLs. */ }
-    return recruitmentUrl.href;
-  }
+function displayName(user, profile) {
+  return profile?.full_name || user?.user_metadata?.full_name ||
+    user?.user_metadata?.name || user?.email?.split('@')[0] || 'Tài khoản';
+}
 
-  function loginUrl(eventId) {
-    const target = new URL(recruitmentUrl.href);
-    if (eventId) target.searchParams.set('event', eventId);
-    const login = new URL('./dang-nhap.html', window.location.href);
-    login.searchParams.set('next', target.pathname + target.search);
-    return login.href;
-  }
-
-  async function request(path, payload, method = 'GET') {
-    const headers = { Accept: 'application/json' };
-    const options = { method, headers };
-    if (payload !== undefined) {
-      headers['Content-Type'] = 'application/json';
-      options.body = JSON.stringify(payload);
+function syncHeader() {
+  const loggedIn = Boolean(currentUser);
+  all('[data-member-login]').forEach((link) => { link.hidden = loggedIn; });
+  all('[data-member-account]').forEach((account) => {
+    account.hidden = !loggedIn;
+    if (!loggedIn) account.open = false;
+    const summary = account.querySelector('summary');
+    summary?.querySelector('.member-avatar')?.remove();
+    const icon = summary?.querySelector('.member-icon');
+    const src = avatarUrl(currentUser, currentProfile);
+    if (src && summary) {
+      const image = document.createElement('img');
+      image.className = 'member-avatar';
+      image.src = src;
+      image.alt = '';
+      image.width = 24;
+      image.height = 24;
+      image.referrerPolicy = 'no-referrer';
+      summary.insertBefore(image, icon || summary.firstChild);
     }
-    if (window.FEVMemberBackend && typeof window.FEVMemberBackend.request === 'function') {
-      return window.FEVMemberBackend.request(path, options);
-    }
-    throw new Error('Chưa tải được chức năng đăng nhập. Vui lòng tải lại trang.');
-  }
-
-  function syncSession() {
-    const user = state.user;
-    all('[data-member-login]').forEach((link) => { link.hidden = Boolean(user); });
-    all('[data-member-account]').forEach((account) => {
-      account.hidden = !user;
-      if (!user) account.open = false;
-    });
-    all('[data-member-name]').forEach((name) => { name.textContent = user ? (user.displayName || user.email) : 'Tài khoản'; });
-    all('[data-member-email]').forEach((email) => { email.textContent = user?.email || ''; });
-    const gate = select('[data-member-gate]');
-    const welcome = select('[data-member-welcome]');
-    if (gate) gate.hidden = Boolean(user);
-    if (welcome) welcome.hidden = !user;
-    const memberName = select('[data-recruitment-member]');
-    if (memberName) memberName.textContent = user ? (user.displayName || user.email) : '';
-    if (loginForm) {
-      loginForm.hidden = Boolean(user);
-      select('[data-login-current]').hidden = !user;
-      select('[data-login-current-name]').textContent = user ? (user.displayName || user.email) : '';
-      select('[data-login-continue]').href = returnTarget();
-    }
-  }
-
-  async function loadSession() {
-    try {
-      const result = await request('/auth/me');
-      state.user = result.user || null;
-    } catch (error) {
-      if (loginForm) {
-        status(select('#login-status'), error.message, 'error');
-      }
-    } finally {
-      state.sessionChecking = false;
-      if (loginForm) {
-        select('[data-login-submit]').disabled = false;
-      }
-      syncSession();
-    }
-  }
-
-  all('[data-member-logout]').forEach((button) => {
-    button.addEventListener('click', async () => {
-      button.disabled = true;
-      const errorElement = button.parentElement.querySelector('[data-member-account-error]');
-      status(errorElement);
-      try {
-        await request('/auth/logout', {}, 'POST');
-        state.user = null;
-        syncSession();
-        if (recruitmentList) renderEventsAfterSession();
-      } catch (error) {
-        status(errorElement, error.message, 'error');
-      } finally {
-        button.disabled = false;
-      }
-    });
+    if (icon) icon.hidden = Boolean(src);
   });
-
-  const passwordToggle = select('[data-password-toggle]');
-  passwordToggle?.addEventListener('click', () => {
-    const input = select('#member-password');
-    const show = input.type === 'password';
-    input.type = show ? 'text' : 'password';
-    passwordToggle.textContent = show ? 'ẨN' : 'HIỆN';
-    passwordToggle.setAttribute('aria-label', show ? 'Ẩn mật khẩu' : 'Hiện mật khẩu');
-    passwordToggle.setAttribute('aria-pressed', String(show));
+  all('[data-member-name]').forEach((name) => {
+    name.textContent = loggedIn ? displayName(currentUser, currentProfile) : 'Tài khoản';
   });
-
-  loginForm?.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (state.sessionChecking || select('[data-login-submit]').disabled) return;
-    if (!loginForm.reportValidity()) return;
-    const submit = select('[data-login-submit]');
-    const password = select('#member-password');
-    submit.disabled = true;
-    submit.textContent = 'ĐANG ĐĂNG NHẬP…';
-    status(select('#login-status'));
-    try {
-      const result = await request('/auth/login', {
-        email: select('#member-email').value.trim(),
-        password: password.value,
-      }, 'POST');
-      state.user = result.user;
-      password.value = '';
-      status(select('#login-status'), 'Đăng nhập thành công. Đang chuyển trang…', 'success');
-      window.location.assign(returnTarget());
-    } catch (error) {
-      status(select('#login-status'), error.message, 'error');
-      submit.disabled = false;
-      submit.textContent = 'ĐĂNG NHẬP ↗';
-    }
+  all('[data-member-email]').forEach((email) => { email.textContent = currentUser?.email || ''; });
+  all('.member-account-panel').forEach((panel) => {
+    if (panel.querySelector('[data-member-admin]')) return;
+    const link = document.createElement('a');
+    link.href = new URL('./quan-tri.html', import.meta.url).href;
+    link.textContent = 'Trang quản trị ↗';
+    link.dataset.memberAdmin = '';
+    link.hidden = true;
+    panel.insertBefore(link, panel.querySelector('[data-member-logout]'));
   });
-
-  function eventIsClosed(event) {
-    const deadline = event.deadline ? new Date(event.deadline).getTime() : NaN;
-    return Number.isFinite(deadline) && deadline < Date.now();
+  all('[data-member-admin]').forEach((link) => {
+    link.hidden = currentProfile?.role !== 'admin' || !currentProfile?.is_active;
+  });
+  const currentNotice = select('[data-login-current]');
+  if (currentNotice) {
+    currentNotice.hidden = !loggedIn;
+    select('[data-login-current-name]').textContent = loggedIn ? displayName(currentUser, currentProfile) : '';
+    select('[data-login-continue]').href = returnTarget().href;
   }
-
-  function renderEvents() {
-    if (!recruitmentList) return;
-    recruitmentList.replaceChildren();
-    const events = state.events;
-    select('[data-recruitment-empty]').hidden = events.length > 0;
-    select('[data-recruitment-count]').textContent = events.length ? events.length + ' SỰ KIỆN' : '';
-    events.forEach((event) => {
-      const card = element('article', 'recruitment-card');
-      const closed = eventIsClosed(event);
-      card.append(element('p', 'eyebrow', closed ? 'ĐÃ ĐÓNG ĐĂNG KÝ' : 'FEV / ĐANG TUYỂN'));
-      const heading = element('h3', '', event.title);
-      card.append(heading, element('p', 'recruitment-card-description', event.description || ''));
-      const roles = element('div', 'recruitment-roles');
-      for (const role of event.roles || []) roles.append(element('span', '', role));
-      card.append(roles);
-      const deadline = dateLabel(event.deadline);
-      if (deadline) card.append(element('p', 'recruitment-deadline', 'Hạn đăng ký: ' + deadline));
-      const actions = element('div', 'recruitment-card-actions');
-      const button = element('button', 'member-button', closed ? 'ĐÃ HẾT HẠN ĐĂNG KÝ' : (state.user ? 'ĐĂNG KÝ THAM GIA ↗' : 'ĐĂNG NHẬP ĐỂ ĐĂNG KÝ ↗'));
-      button.type = 'button';
-      button.disabled = closed;
-      button.setAttribute('aria-label', (state.user ? 'Đăng ký Ban Tổ chức: ' : 'Đăng nhập để đăng ký: ') + event.title);
-      const message = element('p', 'member-form-status');
-      message.setAttribute('role', 'status');
-      message.setAttribute('aria-live', 'polite');
-      button.addEventListener('click', () => {
-        if (!state.user) window.location.assign(loginUrl(event.id));
-        else openApplication(event, message);
-      });
-      actions.append(button);
-      card.append(actions, message);
-      card.dataset.eventId = String(event.id);
-      card.tabIndex = -1;
-      recruitmentList.append(card);
-    });
+  if (loginForm) loginForm.hidden = loggedIn;
+  if (googleButton) googleButton.hidden = loggedIn;
+  if (loginForm && loggedIn && (!currentProfile?.is_active || currentProfile?.role === 'guest')) {
+    showStatus('Tài khoản đã xác thực nhưng chưa được CLB cấp quyền thành viên. Vui lòng liên hệ Ban Chủ nhiệm.', 'error');
   }
+  document.dispatchEvent(new CustomEvent('fev:authchange', {
+    detail: { user: currentUser, profile: currentProfile },
+  }));
+}
 
-  async function loadRecruitment() {
-    try {
-      const result = await request('/recruitment');
-      state.events = Array.isArray(result.events) ? result.events : [];
-      status(select('[data-recruitment-status]'));
-      renderEvents();
-    } catch (error) {
-      status(select('[data-recruitment-status]'), error.message, 'error');
-      select('[data-recruitment-empty]').hidden = true;
+async function refreshAuth() {
+  if (!isSupabaseConfigured) {
+    currentUser = null;
+    currentProfile = null;
+    syncHeader();
+    showStatus('Chưa cấu hình Supabase URL và anon key cho website.', 'error');
+    return;
+  }
+  const { data, error } = await supabase.auth.getUser();
+  if (error && error.name !== 'AuthSessionMissingError') {
+    showStatus('Không kiểm tra được phiên đăng nhập. Vui lòng thử lại.', 'error');
+    return false;
+  }
+  currentUser = data?.user || null;
+  currentProfile = null;
+  if (currentUser) {
+    const result = await supabase.from('profiles')
+      .select('id,full_name,email,avatar_url,role,is_active')
+      .eq('id', currentUser.id).maybeSingle();
+    if (result.error) {
+      showStatus('Không tải được quyền tài khoản. Vui lòng tải lại trang.', 'error');
+      return false;
+    }
+    currentProfile = result.data;
+    const isFpt = (currentUser.email || '').toLowerCase().endsWith('@fpt.edu.vn');
+    if (!isFpt && currentProfile?.role !== 'admin') {
+      await supabase.auth.signOut();
+      currentUser = null;
+      currentProfile = null;
+      showStatus('Chỉ tài khoản Google @fpt.edu.vn được phép đăng nhập.', 'error');
     }
   }
+  syncHeader();
+  return true;
+}
 
-  function openApplication(event, message) {
-    if (!state.user || eventIsClosed(event)) return;
+async function handleOAuthCallback() {
+  if (!loginForm || !isSupabaseConfigured) return false;
+  const params = new URLSearchParams(location.search);
+  if (params.has('code') || params.has('error')) {
     try {
-      const target = new URL(event.applicationUrl);
-      if (target.protocol !== 'https:' || target.username || target.password) throw new Error('Invalid registration URL');
-      window.open(target.href, '_blank', 'noopener,noreferrer');
-      status(message, 'Vui lòng hoàn tất gửi thông tin tại biểu mẫu đăng ký trong tab mới. Nếu chưa thấy, hãy cho phép trình duyệt mở tab mới.');
-    } catch {
-      status(message, 'Thông tin đăng ký sẽ được cập nhật. Vui lòng quay lại sau hoặc liên hệ CLB.');
+      oauthNext = sessionStorage.getItem('fev-oauth-next');
+      sessionStorage.removeItem('fev-oauth-next');
+    } catch { oauthNext = null; }
+  }
+  if (params.has('error')) {
+    showStatus('Đăng nhập Google chưa hoàn tất. Vui lòng thử lại.', 'error');
+    for (const key of ['error', 'error_description', 'error_code']) params.delete(key);
+    history.replaceState(null, '', `${location.pathname}${params.size ? '?' + params : ''}`);
+    return false;
+  }
+  const code = params.get('code');
+  if (!code) return false;
+  showStatus('Đang xác thực tài khoản Google…');
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  params.delete('code');
+  history.replaceState(null, '', `${location.pathname}${params.size ? '?' + params : ''}`);
+  if (error) {
+    showStatus('Không hoàn tất được đăng nhập Google. Vui lòng thử lại.', 'error');
+    return false;
+  }
+  const { data: authenticated } = await supabase.auth.getUser();
+  if (!(authenticated?.user?.email || '').toLowerCase().endsWith('@fpt.edu.vn')) {
+    await supabase.auth.signOut();
+    showStatus('Chỉ email sinh viên @fpt.edu.vn được đăng nhập bằng Google.', 'error');
+    return false;
+  }
+  const profileLoaded = await refreshAuth();
+  if (!profileLoaded) return false;
+  if (currentProfile?.is_active && ['member', 'admin'].includes(currentProfile.role)) {
+    location.assign(returnTarget().href);
+    return true;
+  }
+  showStatus('Tài khoản đã xác thực nhưng chưa được CLB cấp quyền thành viên. Vui lòng liên hệ Ban Chủ nhiệm.', 'error');
+  return false;
+}
+
+all('[data-member-logout]').forEach((button) => {
+  button.addEventListener('click', async () => {
+    if (!supabase) return;
+    button.disabled = true;
+    const errorNode = button.parentElement.querySelector('[data-member-account-error]');
+    if (errorNode) errorNode.textContent = '';
+    const { error } = await supabase.auth.signOut();
+    button.disabled = false;
+    if (error) {
+      if (errorNode) errorNode.textContent = 'Không đăng xuất được. Vui lòng thử lại.';
+      return;
     }
-  }
+    try { sessionStorage.removeItem('fev-oauth-next'); } catch { /* Ignore blocked storage. */ }
+    currentUser = null;
+    currentProfile = null;
+    syncHeader();
+  });
+});
 
-  const sessionReady = loadSession();
-  if (recruitmentList) {
-    Promise.all([sessionReady, loadRecruitment()]).then(() => {
-      renderEventsAfterSession();
-      const eventId = new URLSearchParams(window.location.search).get('event');
-      // Return to the selected event without creating an unsolicited popup.
-      const card = [...recruitmentList.children].find((item) => item.dataset.eventId === eventId);
-      if (card && state.user) card.focus();
-    });
-  }
+select('[data-password-toggle]')?.addEventListener('click', (event) => {
+  const input = select('#member-password');
+  const shown = input.type === 'password';
+  input.type = shown ? 'text' : 'password';
+  event.currentTarget.textContent = shown ? 'ẨN' : 'HIỆN';
+  event.currentTarget.setAttribute('aria-pressed', String(shown));
+  event.currentTarget.setAttribute('aria-label', shown ? 'Ẩn mật khẩu' : 'Hiện mật khẩu');
+});
 
-  function renderEventsAfterSession() {
-    // A failed request must remain an error state, not an empty event listing.
-    if (select('[data-recruitment-status]')?.dataset.kind !== 'error') renderEvents();
+googleButton?.addEventListener('click', async () => {
+  if (!supabase) { showStatus('Chưa cấu hình Supabase.', 'error'); return; }
+  googleButton.disabled = true;
+  showStatus('Đang chuyển đến Google…');
+  const redirect = new URL('./dang-nhap.html', import.meta.url);
+  try {
+    sessionStorage.setItem('fev-oauth-next', returnTarget().pathname + returnTarget().search);
+  } catch { /* The default destination remains available. */ }
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: redirect.href,
+      queryParams: { hd: 'fpt.edu.vn', prompt: 'select_account' },
+    },
+  });
+  if (error) {
+    showStatus('Không bắt đầu được đăng nhập Google. Vui lòng thử lại.', 'error');
+    googleButton.disabled = false;
   }
-})();
+});
+
+loginForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (!supabase || !loginForm.reportValidity()) return;
+  submitButton.disabled = true;
+  showStatus('Đang xác thực tài khoản quản trị…');
+  const email = select('#member-email').value.trim();
+  const password = select('#member-password').value;
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  select('#member-password').value = '';
+  if (error) {
+    showStatus('Email hoặc mật khẩu không đúng.', 'error');
+    submitButton.disabled = false;
+    return;
+  }
+  const profileLoaded = await refreshAuth();
+  if (!profileLoaded) {
+    submitButton.disabled = false;
+    return;
+  }
+  if (currentProfile?.role !== 'admin' || !currentProfile?.is_active) {
+    await supabase.auth.signOut();
+    currentUser = null;
+    currentProfile = null;
+    syncHeader();
+    showStatus('Form email và mật khẩu chỉ dành cho tài khoản quản trị được CLB cấp quyền.', 'error');
+    submitButton.disabled = false;
+    return;
+  }
+  location.assign(returnTarget().href);
+});
+
+if (supabase) supabase.auth.onAuthStateChange(() => {
+  if (!oauthCallbackPending) setTimeout(refreshAuth, 0);
+});
+if (submitButton) submitButton.disabled = !isSupabaseConfigured;
+await handleOAuthCallback();
+oauthCallbackPending = false;
+await refreshAuth();

@@ -1,46 +1,31 @@
 # FPT Event Club — The Way We Went
 
-Website FEV bằng HTML/CSS/JavaScript, phục vụ từ `dist/` trên GitHub Pages. Đăng nhập hiện kiểm tra trực tiếp trên trình duyệt, không dùng dịch vụ xác thực bên ngoài.
+Website tĩnh HTML/CSS/JavaScript với Supabase Auth và PostgreSQL. Giao diện giữ tông tím–đen–đỏ và font Montserrat. Xác thực, vai trò, dữ liệu sự kiện và đơn ứng tuyển được kiểm soát bằng Supabase và RLS.
 
-## Xem trên máy
+## Bắt đầu
 
-Chạy `node server.mjs` trong thư mục này, mở http://127.0.0.1:4173. Máy chủ preview chỉ phục vụ `dist/`, không phục vụ mã quản trị hoặc tệp riêng tư.
+Xem [sơ đồ kiến trúc và hướng dẫn thiết lập/deploy](docs/architecture-and-deploy.md) trước. File SQL tạo database là [`supabase/migrations/202610010001_fev_platform.sql`](supabase/migrations/202610010001_fev_platform.sql); [`supabase/seed_events.sql`](supabase/seed_events.sql) nhập 99 sự kiện lịch sử. Migration cần chạy trên Supabase và Auth hook cần bật trong Dashboard trước khi frontend có thể đăng nhập đúng quy trình.
 
-Khi sửa nguồn: `pnpm install --frozen-lockfile`, `pnpm build`, rồi `pnpm test`. Lệnh build chỉ sao chép danh sách tệp công khai vào `dist/`.
+```powershell
+$env:SUPABASE_URL = 'https://PROJECT_REF.supabase.co'
+$env:SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_...'
+$env:REQUIRE_SUPABASE_CONFIG = '1'
+node scripts/build-static.mjs
+node server.mjs
+```
 
-## Nội dung
+Mở `http://127.0.0.1:4173`. `dist/` là bản build được deploy; không chỉnh trực tiếp. `node --test tests/*.test.mjs` kiểm tra migration/RLS trên PostgreSQL mô phỏng. Kiểm thử OAuth và Data API thật cần Supabase project đã cấu hình.
 
-- `index.html`: nội dung trang chủ, thống kê và liên kết.
-- `styles.css`: giao diện tím–đen–đỏ, desktop/mobile, hỗ trợ giảm chuyển động.
-- `app.js`: menu, hiệu ứng xuất hiện, thống kê.
-- `dang-nhap.html`: đăng nhập thành viên; `tuyen-ban-to-chuc.html`: sự kiện mở tuyển và liên kết đăng ký.
-- `member.js`, `member-api.js`, `member.css`: giao diện và kiểm tra đăng nhập tại trình duyệt.
-- `member-config.js`: cấu hình công khai cho đăng nhập và danh sách sự kiện. Không đặt mật khẩu nguyên văn hoặc dữ liệu riêng tư trong tệp này.
-- `supabase/migrations/`, `scripts/provision-members.mjs` và `docs/member-backend.md`: phương án backend dự phòng, hiện không hoạt động và không được xuất bản trong `dist/`.
-- `assets/fev-logo.png`: logo gốc do CLB cung cấp, giữ nguyên màu và độ trong suốt.
-- `assets/cover-k22.jpg`: ảnh K22 gốc do CLB cung cấp, hiện thay thế video hero.
-- Font Montserrat được phục vụ từ file cục bộ.
+Để chạy kiểm thử trong checkout mới, cài dependencies bằng `pnpm install --frozen-lockfile` trước.
 
-Số liệu 14 năm, 450+ thành viên, 220+ sự kiện, 120+ đối tác do chủ CLB cung cấp. Email và Instagram lấy từ cover K22. Chưa có thông tin sự kiện đang tuyển nên danh sách tuyển Ban Tổ chức để trống.
+## Cấu trúc
 
-## Đăng nhập đơn giản
+- `index.html`: trang chủ.
+- `su-kien.html`, `events.js`, `events.css`: kho sự kiện từ database, tìm theo tên và lọc năm/loại.
+- `dang-nhap.html`, `member.js`, `supabase-client.js`: Google OAuth sinh viên, email/password quản trị, session và header.
+- `tuyen-ban-to-chuc.html`, `recruitment.js`, `recruitment.css`: đợt tuyển, form trực tiếp và trạng thái đơn.
+- `quan-tri.html`, `admin.js`, `admin.css`: giao diện quản trị sự kiện và đơn.
+- `styles.css`, `member.css`, `app.js`: design system, layout, tương tác chung.
+- `scripts/build-static.mjs`: build danh sách file public và chèn URL/anon key vào bản tĩnh.
 
-Thông tin kiểm tra đăng nhập nằm trong mã công khai; trạng thái đăng nhập chỉ được lưu cục bộ trong trình duyệt. Đây là điều kiện hiển thị giao diện, có thể bị bỏ qua bằng công cụ phát triển, **không bảo vệ dữ liệu riêng tư và không xác thực danh tính thật**. Không dùng mật khẩu cá nhân quan trọng cho cơ chế này.
-
-Khi bổ sung sự kiện, cấu hình `applicationUrl` bằng liên kết HTTPS của biểu mẫu đăng ký. Nút đăng ký yêu cầu đăng nhập trong giao diện rồi mở biểu mẫu ở tab mới; nếu chưa có liên kết, trang thông báo chờ cập nhật. Website không tự lưu đơn, không hiển thị lịch sử đơn và không tuyên bố đã gửi đăng ký. Quyền truy cập và lưu trữ của biểu mẫu do nơi cung cấp biểu mẫu quản lý.
-
-## Thay ảnh hero bằng video
-
-Thay thẻ `img` bên trong `.hero-media` bằng `video` có `autoplay muted loop playsinline`, đặt `poster="./assets/cover-k22.jpg"`. Giữ nguyên `.hero-shade` và chữ để bảo đảm nội dung dễ đọc. Với người dùng chọn giảm chuyển động, hiển thị ảnh poster.
-
-## Xuất bản
-
-Website được cấu hình để tự động triển khai thư mục `dist/` lên GitHub Pages mỗi khi nhánh `main` được cập nhật.
-
-- Repository: `https://github.com/longluongexotic-droid/fpteventclub`
-- Website chính: `https://fpteventclub.io.vn/`
-- GitHub Pages: `https://longluongexotic-droid.github.io/fpteventclub/`
-
-Canonical, Open Graph, sitemap và file `CNAME` dùng tên miền chính `fpteventclub.io.vn`.
-
-Không đưa ảnh chụp đơn hàng/hoá đơn, mật khẩu nguyên văn hoặc khóa quản trị vào website/Git.
+Chỉ URL và publishable/anon key của Supabase có mặt trên website. **Không đưa service role key, Google Client Secret, dữ liệu riêng tư hoặc mật khẩu vào Git hay frontend.** Các hash mật khẩu từng nằm trong bản web cũ đã là dữ liệu công khai; mọi mật khẩu từng dùng ở đó hoặc được dùng lại cần đổi trước khi tạo tài khoản Supabase.
