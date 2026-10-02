@@ -34,6 +34,23 @@ test('Auth refresh keeps the verified session method when AMR is absent', async 
       'utf8',
     );
     await db.exec(sql);
+    const rls = (await db.query(`
+      select c.relrowsecurity
+      from pg_catalog.pg_class c
+      join pg_catalog.pg_namespace n on n.oid = c.relnamespace
+      where n.nspname = 'fev_private' and c.relname = 'session_auth_methods'
+    `)).rows[0];
+    assert.equal(rls.relrowsecurity, true);
+    const policies = (await db.query(`
+      select policyname, cmd, roles
+      from pg_catalog.pg_policies
+      where schemaname = 'fev_private' and tablename = 'session_auth_methods'
+      order by policyname
+    `)).rows;
+    assert.deepEqual(policies, [
+      { policyname: 'auth_hook_read_session_methods', cmd: 'SELECT', roles: ['supabase_auth_admin'] },
+      { policyname: 'auth_hook_record_session_method', cmd: 'INSERT', roles: ['supabase_auth_admin'] },
+    ]);
     const issue = async (userId, sessionId, email, authenticationMethod, amr) => {
       const claims = { sub: userId, session_id: sessionId, email, is_anonymous: false };
       if (amr !== undefined) claims.amr = amr;
@@ -84,6 +101,17 @@ test('Auth refresh keeps the verified session method when AMR is absent', async 
     try {
       await assert.rejects(issue(member, sessions.member, 'member@fpt.edu.vn', 'token_refresh'),
         /permission denied/i);
+    } finally {
+      await db.exec('reset role');
+    }
+    await db.exec(`
+      grant usage on schema fev_private to authenticated;
+      grant select on fev_private.session_auth_methods to authenticated;
+      set role authenticated;
+    `);
+    try {
+      const hiddenRows = (await db.query('select session_id from fev_private.session_auth_methods')).rows;
+      assert.equal(hiddenRows.length, 0);
     } finally {
       await db.exec('reset role');
     }

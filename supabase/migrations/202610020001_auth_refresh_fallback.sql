@@ -9,6 +9,17 @@ create table if not exists fev_private.session_auth_methods (
   auth_method text not null check (auth_method in ('oauth', 'password')),
   created_at timestamptz not null default now()
 );
+alter table fev_private.session_auth_methods enable row level security;
+drop policy if exists auth_hook_read_session_methods on fev_private.session_auth_methods;
+create policy auth_hook_read_session_methods
+  on fev_private.session_auth_methods
+  for select to supabase_auth_admin
+  using (true);
+drop policy if exists auth_hook_record_session_method on fev_private.session_auth_methods;
+create policy auth_hook_record_session_method
+  on fev_private.session_auth_methods
+  for insert to supabase_auth_admin
+  with check (true);
 revoke all on table fev_private.session_auth_methods
   from public, anon, authenticated, service_role;
 grant usage on schema fev_private to supabase_auth_admin;
