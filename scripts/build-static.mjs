@@ -6,6 +6,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 // An explicit public-file list prevents scripts, SQL, private configuration, and node_modules from being published.
 const files = [
   '.nojekyll', 'CNAME', 'index.html', 'su-kien.html', 'dang-nhap.html',
+  'chinh-sach-quyen-rieng-tu.html', 'privacy.css',
   'tuyen-ban-to-chuc.html', 'quan-tri.html', 'styles.css', 'app.js',
   'member.css', 'member.js', 'events.css', 'events.js',
   'recruitment.css', 'recruitment.js', 'admin.css', 'admin.js',
