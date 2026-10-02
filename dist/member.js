@@ -16,6 +16,7 @@ let currentUser = null;
 let currentProfile = null;
 let oauthNext = null;
 let oauthCallbackPending = Boolean(loginForm && new URLSearchParams(location.search).has('code'));
+let passwordLoginPending = false;
 
 function showStatus(message = '', kind = '') {
   if (!loginStatus) return;
@@ -23,9 +24,9 @@ function showStatus(message = '', kind = '') {
   loginStatus.dataset.kind = kind;
 }
 
-function returnTarget() {
+function returnTarget(forAdmin = false) {
   const candidate = new URLSearchParams(location.search).get('next') || oauthNext;
-  const fallback = new URL('./tuyen-ban-to-chuc.html', import.meta.url);
+  const fallback = new URL(forAdmin ? './quan-tri.html' : './tuyen-ban-to-chuc.html', import.meta.url);
   if (!candidate) return fallback;
   try {
     const target = new URL(candidate, location.href);
@@ -89,7 +90,7 @@ function syncHeader() {
   if (currentNotice) {
     currentNotice.hidden = !loggedIn;
     select('[data-login-current-name]').textContent = loggedIn ? displayName(currentUser, currentProfile) : '';
-    select('[data-login-continue]').href = returnTarget().href;
+    select('[data-login-continue]').href = returnTarget(currentProfile?.role === 'admin').href;
   }
   if (loginForm) loginForm.hidden = loggedIn;
   if (googleButton) googleButton.hidden = loggedIn;
@@ -130,7 +131,9 @@ async function refreshAuth() {
       await supabase.auth.signOut();
       currentUser = null;
       currentProfile = null;
-      showStatus('Chỉ tài khoản Google @fpt.edu.vn được phép đăng nhập.', 'error');
+      showStatus(passwordLoginPending
+        ? 'Form email và mật khẩu chỉ dành cho tài khoản quản trị được CLB cấp quyền.'
+        : 'Chỉ tài khoản Google @fpt.edu.vn được phép đăng nhập.', 'error');
     }
   }
   syncHeader();
@@ -231,31 +234,36 @@ loginForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
   if (!supabase || !loginForm.reportValidity()) return;
   submitButton.disabled = true;
+  passwordLoginPending = true;
   showStatus('Đang xác thực tài khoản quản trị…');
-  const email = select('#member-email').value.trim();
-  const password = select('#member-password').value;
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
-  select('#member-password').value = '';
-  if (error) {
-    showStatus('Email hoặc mật khẩu không đúng.', 'error');
-    submitButton.disabled = false;
-    return;
+  try {
+    const email = select('#member-email').value.trim();
+    const password = select('#member-password').value;
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    select('#member-password').value = '';
+    if (error) {
+      showStatus('Email hoặc mật khẩu không đúng.', 'error');
+      submitButton.disabled = false;
+      return;
+    }
+    const profileLoaded = await refreshAuth();
+    if (!profileLoaded) {
+      submitButton.disabled = false;
+      return;
+    }
+    if (currentProfile?.role !== 'admin' || !currentProfile?.is_active) {
+      await supabase.auth.signOut();
+      currentUser = null;
+      currentProfile = null;
+      syncHeader();
+      showStatus('Form email và mật khẩu chỉ dành cho tài khoản quản trị được CLB cấp quyền.', 'error');
+      submitButton.disabled = false;
+      return;
+    }
+    location.assign(returnTarget(true).href);
+  } finally {
+    passwordLoginPending = false;
   }
-  const profileLoaded = await refreshAuth();
-  if (!profileLoaded) {
-    submitButton.disabled = false;
-    return;
-  }
-  if (currentProfile?.role !== 'admin' || !currentProfile?.is_active) {
-    await supabase.auth.signOut();
-    currentUser = null;
-    currentProfile = null;
-    syncHeader();
-    showStatus('Form email và mật khẩu chỉ dành cho tài khoản quản trị được CLB cấp quyền.', 'error');
-    submitButton.disabled = false;
-    return;
-  }
-  location.assign(returnTarget().href);
 });
 
 if (supabase) supabase.auth.onAuthStateChange(() => {
