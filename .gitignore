@@ -7,3 +7,4 @@ node_modules/
 !.env.example
 .member-private/
 test-results/
+.codex-tmp-gh-secret-deps/

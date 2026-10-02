@@ -2,7 +2,7 @@
 
 ```mermaid
 flowchart LR
-  V[Khách / thành viên / quản trị<br>Trình duyệt] --> S[HTML + CSS + JS tĩnh<br>Cloudflare Pages hoặc Vercel]
+  V[Khách / thành viên / quản trị<br>Trình duyệt] --> S[HTML + CSS + JS tĩnh<br>Hiện tại GitHub Pages]
   S --> A[Supabase Auth<br>Google OAuth / Email Password]
   S --> API[Supabase Data API<br>publishable / anon key + JWT]
   API --> RLS[PostgreSQL RLS và column grants]
@@ -50,7 +50,7 @@ Nếu project đã có tài khoản ngoài miền từ trước, hook tạo user
 3. Sao chép Client ID và Client Secret vào **Supabase Auth → Providers → Google**. Client Secret chỉ nằm ở Supabase/Google Cloud.
 4. Trong **Supabase Auth → URL Configuration**, đặt Site URL `https://fpteventclub.io.vn` và Redirect URL chính xác `https://fpteventclub.io.vn/dang-nhap.html`. Thêm `http://127.0.0.1:4173/dang-nhap.html` cho local preview nếu cần. Trang dùng PKCE; `member.js` đổi `code` lấy session ở callback.
 5. Thử Google với một email `@fpt.edu.vn` đã cấp vai trò `member`, một email FPT chưa cấp vai trò, và một email ngoài miền. Chỉ trường hợp đầu được nộp đơn. Email ngoài miền đăng ký mới phải bị hook chặn.
-6. Trên Supabase project thật, thử làm mới token sau khi đăng nhập bằng Google của thành viên và Email/Password của admin (ví dụ gọi `supabase.auth.refreshSession()`). Hook đọc `claims.amr` nếu có (dạng object hoặc chuỗi); khi AMR thiếu, `null` hoặc rỗng, hook dùng phương thức đã ghi cho đúng `session_id` và `user_id` trong `fev_private.session_auth_methods`. AMR không rỗng nhưng không có phương thức đăng nhập hợp lệ, hoặc phiên cũ thiếu cả AMR lẫn bản ghi, sẽ bị từ chối; người dùng cần đăng xuất rồi đăng nhập lại. Kiểm tra cả hai loại tài khoản sau khi áp dụng migration thứ ba và trước khi trỏ domain production.
+6. Trên Supabase project thật, thử làm mới token sau khi đăng nhập bằng Google của thành viên và Email/Password của admin (ví dụ gọi `supabase.auth.refreshSession()`). Hook đọc `claims.amr` nếu có (dạng object hoặc chuỗi); khi AMR thiếu, `null` hoặc rỗng, hook dùng phương thức đã ghi cho đúng `session_id` và `user_id` trong `fev_private.session_auth_methods`. AMR không rỗng nhưng không có phương thức đăng nhập hợp lệ, hoặc phiên cũ thiếu cả AMR lẫn bản ghi, sẽ bị từ chối; người dùng cần đăng xuất rồi đăng nhập lại. Kiểm tra cả hai loại tài khoản sau khi áp dụng migration thứ ba.
 
 Tài liệu gốc: [Supabase Google login](https://supabase.com/docs/guides/auth/social-login/auth-google), [Redirect URLs](https://supabase.com/docs/guides/auth/redirect-urls), [Before User Created hook](https://supabase.com/docs/guides/auth/auth-hooks/before-user-created-hook), [Custom Access Token hook](https://supabase.com/docs/guides/auth/auth-hooks/custom-access-token-hook), [JWT claims](https://supabase.com/docs/guides/auth/jwt-fields).
 
@@ -85,4 +85,4 @@ Push sẽ kích hoạt triển khai tự động trên dịch vụ đã liên k�
 
 **Vercel:** Add New → Project → Import Git repository. Framework preset **Other**, Build command `node scripts/build-static.mjs`, Output directory `dist`, root directory là repository này. Đặt ba biến môi trường trên trong Settings → Environment Variables. Trong Project → Settings → Domains, thêm `fpteventclub.io.vn`, lấy chính xác bản ghi DNS mà Vercel hiển thị và cấu hình tại nơi quản lý DNS. Sau khi Vercel xác nhận domain và cấp HTTPS, cập nhật Supabase Site URL/Redirect URL theo domain chính. [Vercel builds](https://vercel.com/docs/builds), [Custom domain](https://vercel.com/docs/domains/set-up-custom-domain).
 
-Chỉ một nền tảng nên nhận domain chính tại một thời điểm. Trước khi đổi DNS, kiểm tra URL preview, đăng nhập Google, quyền admin/member/guest và các trạng thái gửi đơn. Không thể hoàn tất kết nối OAuth, chạy migration trên project thật hoặc đổi DNS nếu chưa có quyền truy cập Supabase/Google Cloud/hosting/domain.
+Chỉ một nền tảng nên nhận domain chính tại một thời điểm. Domain hiện đang chạy trên GitHub Pages; trước khi chuyển sang Cloudflare Pages hoặc Vercel, kiểm tra URL preview, đăng nhập Google, quyền admin/member/guest và các trạng thái gửi đơn rồi mới đổi DNS. Google OAuth đã ở chế độ In production, các migration và 99 sự kiện đã được áp dụng trên Supabase project thật; vẫn cần kiểm tra phiên đăng nhập bằng tài khoản sinh viên FPT và tài khoản quản trị sau khi cấp vai trò.
