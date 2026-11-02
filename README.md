@@ -1,6 +1,6 @@
 # FPT Event Club — The Way We Went
 
-Website tĩnh HTML/CSS/JavaScript với Supabase Auth và PostgreSQL. Giao diện giữ tông tím–đen–đỏ và font Montserrat. Xác thực, vai trò, dữ liệu sự kiện và đơn ứng tuyển được kiểm soát bằng Supabase và RLS.
+Website tĩnh HTML/CSS/JavaScript với Supabase Auth và PostgreSQL. Giao diện dùng tông tím–đen–đỏ, Lato cho nội dung tiếng Việt và Poppins cho thương hiệu tiếng Anh. Xác thực, vai trò, dữ liệu sự kiện và đơn ứng tuyển được kiểm soát bằng Supabase và RLS.
 
 Bản đang chạy: [fpteventclub.io.vn](https://fpteventclub.io.vn/) trên GitHub Pages. Google OAuth đã nối với Supabase; mã nguồn và 99 sự kiện được triển khai tự động từ nhánh `main`.
 
@@ -29,6 +29,7 @@ Mở `http://127.0.0.1:4173`. `dist/` là bản build được deploy; không ch
 - `quan-tri.html`, `admin.js`, `admin.css`: giao diện quản trị sự kiện và đơn.
 - `chinh-sach-quyen-rieng-tu.html`, `privacy.css`: chính sách dữ liệu công khai cho người dùng và Google OAuth.
 - `styles.css`, `member.css`, `app.js`: design system, layout, tương tác chung.
+- `theme.css`, `fonts.css`: cỡ chữ, nút và biểu mẫu thân thiện; font tự lưu trên website. Nguồn và giấy phép tại `assets/FONT-SOURCES.md`.
 - `scripts/build-static.mjs`: build danh sách file public và chèn URL/anon key vào bản tĩnh.
 
 Chỉ URL và publishable/anon key của Supabase có mặt trên website. **Không đưa service role key, Google Client Secret, dữ liệu riêng tư hoặc mật khẩu vào Git hay frontend.** Các hash mật khẩu từng nằm trong bản web cũ đã là dữ liệu công khai; mọi mật khẩu từng dùng ở đó hoặc được dùng lại cần đổi trước khi tạo tài khoản Supabase.

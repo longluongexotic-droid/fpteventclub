@@ -4,23 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#100d14" />
-    <meta name="description" content="FPT Event Club — The Way We Went. Thành lập năm 2012, FEV là câu lạc bộ chuyên trách hoạch định, sản xuất và vận hành sự kiện tại Trường Đại học FPT TP.HCM." />
+    <meta name="description" content="Chào bạn, tụi mình là FPT Event Club! Từ năm 2012, FEV cùng sinh viên FPT TP.HCM lên ý tưởng, dựng sân khấu và làm nên những sự kiện đáng nhớ." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:site_name" content="FPT Event Club" />
     <meta property="og:title" content="FPT Event Club — The Way We Went" />
-    <meta property="og:description" content="Từ ý tưởng trên bản vẽ đến những sân khấu sống động. Khám phá năng lực, con người và hành trình của FPT Event Club từ năm 2012." />
+    <meta property="og:description" content="Phía sau mỗi sân khấu là một nhóm bạn áo tím và rất nhiều checklist. Ghé FEV để gặp tụi mình, xem lại sự kiện và tìm một chỗ trong đội nhé." />
     <meta property="og:image" content="https://fpteventclub.io.vn/assets/cover-k22.jpg" />
     <meta property="og:url" content="https://fpteventclub.io.vn/" />
     <link rel="canonical" href="https://fpteventclub.io.vn/" />
     <link rel="icon" href="./assets/fev-logo.png" type="image/png" />
-    <link rel="preload" href="./assets/montserrat.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./assets/lato-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./assets/poppins-extrabold.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="./assets/cover-k22.jpg" as="image" fetchpriority="high" />
-    <link rel="stylesheet" href="./styles.css?v=20260916" />
+    <link rel="stylesheet" href="./fonts.css?v=20261102" />
+    <link rel="stylesheet" href="./styles.css?v=20261102" />
     <script src="./app.js?v=20260916" defer></script>
     <link rel="stylesheet" href="./member.css?v=20261001-supabase1" />
-    <script type="module" src="./member.js"></script>
+    <script type="module" src="./member.js?v=20261102"></script>
     <title>FPT Event Club — The Way We Went</title>
+    <link rel="stylesheet" href="./theme.css?v=20261102" />
   </head>
   <body>
     <a class="skip-link" href="#noi-dung">Đến nội dung chính</a>
@@ -32,15 +35,15 @@
       </a>
       <div class="header-right">
         <div class="member-access" data-member-access>
-          <a class="member-login" href="./dang-nhap.html" data-member-login><span class="member-icon" aria-hidden="true"></span><span>ĐĂNG NHẬP</span></a>
+          <a class="member-login" href="./dang-nhap.html" data-member-login><span class="member-icon" aria-hidden="true"></span><span>Đăng nhập</span></a>
           <details class="member-account" data-member-account hidden>
             <summary><span class="member-icon" aria-hidden="true"></span><span data-member-name>Tài khoản</span></summary>
-            <div class="member-account-panel"><p data-member-email></p><a href="./tuyen-ban-to-chuc.html">Sự kiện tuyển Ban Tổ chức ↗</a><button type="button" data-member-logout>Đăng xuất</button><p class="member-account-error" data-member-account-error role="status"></p></div>
+            <div class="member-account-panel"><p data-member-email></p><a href="./tuyen-ban-to-chuc.html">Tuyển Ban Tổ chức ↗</a><button type="button" data-member-logout>Đăng xuất</button><p class="member-account-error" data-member-account-error role="status"></p></div>
           </details>
         </div>
-        <a class="header-contact" href="#ket-noi">CÙNG TẠO DẤU ẤN <span aria-hidden="true">↗</span></a>
+        <a class="header-contact" href="#ket-noi">Trò chuyện với FEV <span aria-hidden="true">↗</span></a>
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="site-menu">
-          <span class="menu-label">KHÁM PHÁ</span>
+          <span class="menu-label">Menu</span>
           <span class="menu-lines" aria-hidden="true"><i></i><i></i></span>
         </button>
       </div>
@@ -49,10 +52,10 @@
     <nav class="site-menu" id="site-menu" aria-label="Điều hướng chính" hidden>
       <div class="menu-inner">
         <p class="eyebrow"><span class="square"></span> KHÔNG GIAN FEV</p>
-        <a class="menu-link" href="./"><span>01</span> Tổng quan FEV <span aria-hidden="true">↗</span></a>
-        <a class="menu-link" href="#hanh-trinh"><span>02</span> Thế hệ tiếp nối <span aria-hidden="true">↗</span></a>
-        <a class="menu-link" href="./su-kien.html"><span>03</span> Các sự kiện gần đây <span aria-hidden="true">↗</span></a>
-        <a class="menu-link menu-link-recruitment" href="./tuyen-ban-to-chuc.html"><span>04</span> Các sự kiện đang tuyển Ban Tổ chức <span aria-hidden="true">↗</span></a>
+        <a class="menu-link" href="./"><span>01</span> Về FEV <span aria-hidden="true">↗</span></a>
+        <a class="menu-link" href="#hanh-trinh"><span>02</span> Các thế hệ FEV <span aria-hidden="true">↗</span></a>
+        <a class="menu-link" href="./su-kien.html"><span>03</span> Sự kiện <span aria-hidden="true">↗</span></a>
+        <a class="menu-link menu-link-recruitment" href="./tuyen-ban-to-chuc.html"><span>04</span> Tuyển Ban Tổ chức <span aria-hidden="true">↗</span></a>
         <div class="menu-footer"><span>THE WAY WE WENT.</span><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">FACEBOOK ↗</a><a href="mailto:fpteventclub@gmail.com">EMAIL ↗</a></div>
       </div>
     </nav>
@@ -74,15 +77,15 @@
         <div class="hero-heading">
           <p class="eyebrow hero-eyebrow"><span class="square"></span> FPT EVENT CLUB <span class="eyebrow-slash">/</span> EST. 2012</p>
           <h1 id="hero-title"><span>THE WAY</span><span class="title-second">WE WENT<span class="red-dot">.</span></span></h1>
-          <div class="hero-signature"><span class="signature-line"></span><p>HẾT MÌNH VỚI TỪNG KHOẢNH KHẮC.</p><span class="signature-line"></span></div>
+          <div class="hero-signature"><span class="signature-line"></span><p>Có tụi mình ở phía sau sân khấu.</p><span class="signature-line"></span></div>
         </div>
 
         <div class="hero-bottom">
-          <div class="hero-intro"><p class="eyebrow"><span class="square red"></span> TỪ Ý TƯỞNG ĐẾN SÂN KHẤU.</p><p>Chuẩn xác trong vận hành.<br />Bùng nổ trong từng khoảnh khắc.</p></div>
-          <a class="scroll-link" href="#gioi-thieu" aria-label="Khám phá phần giới thiệu FEV"><span>CUỘN ĐỂ KHÁM PHÁ</span><span class="scroll-icon" aria-hidden="true">↓</span></a>
+          <div class="hero-intro"><p class="eyebrow"><span class="square red"></span> Chào bạn, tụi mình là FEV.</p><p>Thích đi sự kiện?<br />Tụi mình còn thích làm ra nó.</p></div>
+          <a class="scroll-link" href="#gioi-thieu" aria-label="Khám phá phần giới thiệu FEV"><span>Làm quen một chút nhé</span><span class="scroll-icon" aria-hidden="true">↓</span></a>
           <a class="hero-feature" href="#hanh-trinh">
             <img src="./assets/cover-k22.jpg" width="118" height="82" alt="Ấn phẩm cộng tác viên FEV K22" />
-            <span class="feature-copy"><span class="eyebrow"><span class="square red"></span> CHƯƠNG TIẾP THEO</span><strong>CỘNG TÁC VIÊN K22</strong><span class="feature-small">Mảnh ghép mới. Hành trình mới.</span></span>
+            <span class="feature-copy"><span class="eyebrow"><span class="square red"></span> Nhà có người mới</span><strong>Cộng tác viên K22</strong><span class="feature-small">Gặp những gương mặt mới của FEV.</span></span>
             <span class="feature-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
@@ -96,151 +99,151 @@
       </div>
 
       <section class="about section-shell" id="gioi-thieu" aria-labelledby="about-title">
-        <div class="section-topline"><p class="eyebrow"><span class="square purple"></span> 01 / FEV — EST. 2012</p><span class="edition">HOẠCH ĐỊNH. SẢN XUẤT. VẬN HÀNH.</span></div>
+        <div class="section-topline"><p class="eyebrow"><span class="square purple"></span> 01 / FEV — từ năm 2012</p><span class="edition">Lên ý tưởng, rồi xắn tay làm.</span></div>
         <div class="about-grid">
-          <div class="reveal"><h2 class="display-heading" id="about-title">TỪ BẢN VẼ.<br />ĐẾN SÂN KHẤU<br /><em>SỐNG ĐỘNG.</em></h2></div>
+          <div class="reveal"><h2 class="display-heading" id="about-title">Sân khấu vui.<br />Hậu trường<br /><em>cũng thế.</em></h2></div>
           <div class="about-copy reveal">
             <span class="small-asterisk" aria-hidden="true">✳</span>
-            <p class="lead"><strong>FPT Event Club (FEV)</strong> là đơn vị tiên phong trong hoạch định, sản xuất, vận hành và điều phối sự kiện đa quy mô tại Trường Đại học FPT TP.HCM.</p>
-            <p>Thành lập ngày 22/06/2012, FEV vận hành như một đơn vị tổ chức sự kiện độc lập: làm chủ tiến độ, kỹ thuật, nhân sự và trải nghiệm từ ý tưởng đầu tiên đến giây phút sân khấu sáng đèn.</p>
-            <p><strong>The Way We Went</strong> là con đường nhiều thế hệ đã cùng bước qua — từ những đêm chuẩn bị đến khoảnh khắc bùng nổ. Dù đi đâu, FEV vẫn là mái nhà để trở về và ngọn lửa của những con người khoác áo Tím.</p>
-            <a class="text-link" href="#dinh-huong">KHÁM PHÁ BẢN SẮC FEV <span aria-hidden="true">↓</span></a>
+            <p class="lead"><strong>FPT Event Club (FEV)</strong> là câu lạc bộ tổ chức sự kiện tại Trường Đại học FPT TP.HCM. Nếu bạn từng tò mò ai lo mọi thứ phía sau sân khấu, chào bạn, có tụi mình đây!</p>
+            <p>Từ ngày 22/06/2012, FEV đã cùng nhau lên ý tưởng, làm kế hoạch, lo kỹ thuật và điều phối con người. Để vài giờ sự kiện diễn ra trọn vẹn, hậu trường thường cần nhiều hơn vài trang checklist.</p>
+            <p><strong>The Way We Went</strong> là tên gọi cho con đường các thế hệ FEV đã đi cùng nhau. Có những buổi chuẩn bị dài, những lần học được bài học mới và những người bạn vẫn nhận ra nhau nhờ chiếc áo tím.</p>
+            <a class="text-link" href="#dinh-huong">Tụi mình làm việc thế nào? <span aria-hidden="true">↓</span></a>
           </div>
         </div>
         <div class="capability-header reveal">
-          <p class="eyebrow"><span class="square red"></span> NĂNG LỰC QUA NHỮNG CON SỐ</p>
-          <p>Chọn từng con số để xem câu chuyện phía sau.</p>
+          <p class="eyebrow"><span class="square red"></span> FEV qua vài con số</p>
+          <p>Bấm vào từng ô, tụi mình kể thêm.</p>
         </div>
         <div class="stats" aria-label="Năng lực FEV qua những con số">
           <details class="stat reveal">
-            <summary><span class="stat-index">01 /</span><strong class="stat-number" data-count="14">14<span>+</span></strong><span class="stat-label">NĂM HOẠT ĐỘNG</span><span class="stat-toggle" aria-hidden="true">+</span></summary>
-            <p class="stat-detail">Vận hành liên tục từ năm 2012, duy trì vị thế là đơn vị tổ chức sự kiện đáng tin cậy tại FPTU.</p>
+            <summary><span class="stat-index">01 /</span><strong class="stat-number" data-count="14">14<span>+</span></strong><span class="stat-label">Năm cùng làm sự kiện</span><span class="stat-toggle" aria-hidden="true">+</span></summary>
+            <p class="stat-detail">Từ năm 2012 đến nay, các thế hệ FEV tiếp nối nhau làm sự kiện tại FPTU. Tuổi CLB tăng, danh sách kỷ niệm cũng vậy.</p>
           </details>
           <details class="stat reveal">
-            <summary><span class="stat-index">02 /</span><strong class="stat-number" data-count="220">220<span>+</span></strong><span class="stat-label">DỰ ÁN ĐÃ THỰC THI</span><span class="stat-toggle" aria-hidden="true">+</span></summary>
-            <p class="stat-detail">Bao gồm đại nhạc hội, lễ vinh danh, sự kiện thể thao, hoạt động cộng đồng và nhiều định dạng khác.</p>
+            <summary><span class="stat-index">02 /</span><strong class="stat-number" data-count="220">220<span>+</span></strong><span class="stat-label">Dự án đã làm</span><span class="stat-toggle" aria-hidden="true">+</span></summary>
+            <p class="stat-detail">Đại nhạc hội, lễ vinh danh, thể thao, hoạt động cộng đồng… Mỗi dự án lại thêm một câu chuyện hậu trường để kể.</p>
           </details>
           <details class="stat reveal">
-            <summary><span class="stat-index">03 /</span><strong class="stat-number" data-count="450">450<span>+</span></strong><span class="stat-label">NHÂN SỰ</span><span class="stat-toggle" aria-hidden="true">+</span></summary>
-            <p class="stat-detail">Mạng lưới thành viên kỳ cựu cùng các thế hệ nhân sự thực chiến được đào tạo bài bản.</p>
+            <summary><span class="stat-index">03 /</span><strong class="stat-number" data-count="450">450<span>+</span></strong><span class="stat-label">Con người FEV</span><span class="stat-toggle" aria-hidden="true">+</span></summary>
+            <p class="stat-detail">Các anh chị đi trước và thành viên những thế hệ sau cùng góp sức, chia sẻ kinh nghiệm và học nghề qua từng sự kiện.</p>
           </details>
           <details class="stat reveal">
-            <summary><span class="stat-index">04 /</span><strong class="stat-number" data-count="120">120<span>+</span></strong><span class="stat-label">ĐỐI TÁC</span><span class="stat-toggle" aria-hidden="true">+</span></summary>
-            <p class="stat-detail">Hơn 120 đối tác đã tin tưởng hợp tác và đồng hành cùng FEV qua nhiều dự án.</p>
+            <summary><span class="stat-index">04 /</span><strong class="stat-number" data-count="120">120<span>+</span></strong><span class="stat-label">Đối tác đồng hành</span><span class="stat-toggle" aria-hidden="true">+</span></summary>
+            <p class="stat-detail">Hơn 120 đối tác đã cùng FEV thực hiện các dự án. Cảm ơn vì đã tin tưởng giao việc cho những chiếc áo tím.</p>
           </details>
           <details class="stat reveal">
-            <summary><span class="stat-index">05 /</span><strong class="stat-number" data-count="100">100<span>%</span></strong><span class="stat-label">QUY TRÌNH</span><span class="stat-toggle" aria-hidden="true">+</span></summary>
-            <p class="stat-detail">Làm chủ toàn bộ vòng đời: lên ý tưởng, lập kế hoạch, truyền thông và vận hành hiện trường.</p>
+            <summary><span class="stat-index">05 /</span><strong class="stat-number" data-count="100">100<span>%</span></strong><span class="stat-label">Các khâu tổ chức</span><span class="stat-toggle" aria-hidden="true">+</span></summary>
+            <p class="stat-detail">Tụi mình tham gia đủ các khâu: lên ý tưởng, lập kế hoạch, truyền thông và vận hành tại sự kiện.</p>
           </details>
         </div>
       </section>
 
       <section class="identity" id="dinh-huong" aria-labelledby="identity-title">
         <div class="identity-inner section-shell">
-          <div class="section-topline"><p class="eyebrow"><span class="square red"></span> 02 / TỔNG QUAN &amp; ĐỊNH HƯỚNG</p><span class="edition">IN-HOUSE EVENT AGENCY.</span></div>
+          <div class="section-topline"><p class="eyebrow"><span class="square red"></span> 02 / Chuyện nhà FEV</p><span class="edition">Nghiêm túc với việc, gần gũi với nhau.</span></div>
           <div class="identity-grid">
             <div class="reveal">
-              <h2 class="display-heading" id="identity-title">LÀM NGHỀ<br />BẰNG KỶ LUẬT.<br /><em>GIỮ NHÀ BẰNG TÌNH THÂN.</em></h2>
+              <h2 class="display-heading" id="identity-title">Làm cho tốt.<br /><em>Vui cùng nhau.</em></h2>
             </div>
             <div class="identity-copy reveal">
-              <p class="identity-lead">FEV là câu lạc bộ sinh viên chuyên trách sản xuất, vận hành, hỗ trợ kỹ thuật và nhân sự cho các sự kiện tại Trường Đại học FPT TP.HCM.</p>
-              <p>Không dừng ở một câu lạc bộ ngoại khóa, FEV vận hành theo mô hình đơn vị tổ chức sự kiện độc lập. Hơn một thập kỷ thực chiến giúp chúng mình xây dựng khả năng kiểm soát rủi ro, quy trình chuẩn hóa và năng lực triển khai các dự án quy tụ từ hàng trăm đến hàng nghìn người.</p>
+              <p class="identity-lead">Ở FEV, bạn có thể thử sức với sản xuất sự kiện, kỹ thuật, truyền thông hay điều phối nhân sự. Ai cũng có phần việc của mình và có đồng đội để cùng học.</p>
+              <p>Tụi mình tổ chức công việc như một đơn vị sự kiện độc lập, từ kế hoạch đến lúc thu dọn. Sau hơn một thập kỷ làm các chương trình từ hàng trăm đến hàng nghìn người, FEV hiểu rằng một buổi diễn suôn sẻ cần cả sự chuẩn bị lẫn người sẵn sàng đỡ việc cho nhau.</p>
             </div>
           </div>
 
           <article class="vision-card reveal">
-            <p class="eyebrow"><span class="square"></span> TẦM NHÌN</p>
-            <p>Trở thành câu lạc bộ dẫn đầu về năng lực sản xuất sự kiện và đào tạo nhân sự chất lượng cao trong khối đại học khu vực phía Nam; thiết lập chuẩn mực chuyên nghiệp trong cách sinh viên tổ chức và quản trị trải nghiệm sự kiện.</p>
+            <p class="eyebrow"><span class="square"></span> Tụi mình muốn đi đến đâu?</p>
+            <p>FEV muốn trở thành một trong những câu lạc bộ tổ chức sự kiện hàng đầu ở các trường đại học phía Nam. Để đến đó, tụi mình học cách làm việc chuyên nghiệp và giúp mỗi thành viên vững nghề hơn sau từng chương trình.</p>
           </article>
 
-          <div class="mission-header"><p class="eyebrow"><span class="square red"></span> SỨ MỆNH VỚI TỪNG ĐIỂM CHẠM</p><span class="edition">ONE TEAM. MANY IMPACTS.</span></div>
+          <div class="mission-header"><p class="eyebrow"><span class="square red"></span> FEV làm việc vì ai?</p><span class="edition">Có việc để làm, có người để nhớ.</span></div>
           <div class="mission-grid">
-            <article class="mission-card reveal"><span>01</span><h3>ĐỐI TÁC &amp; NHÀ TRƯỜNG</h3><p>Cung cấp giải pháp sự kiện toàn diện, tối ưu nguồn lực và bảo đảm tiến độ, an toàn kỹ thuật cùng chất lượng đầu ra.</p></article>
-            <article class="mission-card reveal"><span>02</span><h3>NHÂN SỰ FEV</h3><p>Kiến tạo môi trường thực nghiệm kỷ luật cao, nơi các thành viên cùng chia sẻ áp lực, hỗ trợ nhau và tôi luyện bản lĩnh từ va chạm thực tế.</p></article>
-            <article class="mission-card reveal"><span>03</span><h3>CỘNG ĐỒNG SINH VIÊN</h3><p>Tạo nên những điểm chạm cảm xúc và văn hóa có chiều sâu, góp phần định hình đời sống tinh thần năng động tại FPTU.</p></article>
+            <article class="mission-card reveal"><span>01</span><h3>Đối tác &amp; nhà trường</h3><p>Làm rõ yêu cầu, tính kỹ nguồn lực và bám sát tiến độ. Sáng tạo đến đâu, an toàn kỹ thuật vẫn phải được kiểm tra cẩn thận.</p></article>
+            <article class="mission-card reveal"><span>02</span><h3>Thành viên FEV</h3><p>Được thử việc mới, được góp ý thật và có đồng đội cùng gỡ khó. Checklist đôi khi dài, nhưng bạn không phải ôm hết một mình.</p></article>
+            <article class="mission-card reveal"><span>03</span><h3>Sinh viên FPTU</h3><p>Làm ra những chương trình để bạn gặp gỡ, vui chơi và mang về một kỷ niệm. Có thêm vài tấm ảnh đẹp nữa thì càng tốt.</p></article>
           </div>
 
           <div class="values-block reveal">
-            <p class="eyebrow"><span class="square"></span> GIÁ TRỊ CỐT LÕI</p>
+            <p class="eyebrow"><span class="square"></span> Năm điều nhà mình coi trọng</p>
             <div class="value-list" aria-label="Năm giá trị cốt lõi của FEV"><span>ĐOÀN KẾT</span><span>KỶ LUẬT</span><span>BẢN LĨNH</span><span>TẬN TÂM</span><span>MINH BẠCH</span></div>
           </div>
         </div>
       </section>
 
       <section class="organization section-shell" id="to-chuc" aria-labelledby="organization-title">
-        <div class="section-topline"><p class="eyebrow"><span class="square purple"></span> 03 / CƠ CẤU TỔ CHỨC</p><span class="edition">CROSS-FUNCTIONAL TEAM.</span></div>
+        <div class="section-topline"><p class="eyebrow"><span class="square purple"></span> 03 / Ai làm gì ở FEV?</p><span class="edition">Mỗi ban một việc, cả nhà một đội.</span></div>
         <div class="organization-intro reveal">
-          <h2 class="display-heading" id="organization-title">BỐN CHUYÊN MÔN.<br /><em>MỘT ĐỘI HÌNH.</em></h2>
-          <p>FEV ứng dụng mô hình nhóm đa chức năng. Mỗi ban làm chủ một mảng nghiệp vụ, đồng thời phối hợp xuyên suốt toàn bộ vòng đời dự án — từ ý tưởng đầu tiên đến khi sự kiện khép lại.</p>
+          <h2 class="display-heading" id="organization-title">Bốn ban.<br /><em>Chung một nhà.</em></h2>
+          <p>Có người giỏi lên kế hoạch, có người mê máy ảnh, có người thích lo hiện trường. Bốn ban chia nhau công việc và phối hợp từ buổi họp đầu tiên đến lúc dọn xong sự kiện.</p>
         </div>
 
         <div class="department-list">
           <details class="department reveal">
             <summary><span class="department-index">01</span><span class="department-title">BAN KẾ HOẠCH</span><span class="department-role">Chiến lược &amp; hợp tác</span><span class="department-toggle" aria-hidden="true">+</span></summary>
-            <div class="department-body"><p>Định hình linh hồn và bộ khung chiến lược cho mọi dự án, chuyển hóa ý tưởng thành đề án chi tiết, khả thi và tối ưu ngân sách.</p><p>Ban cũng phụ trách hồ sơ tài trợ, đàm phán với nhãn hàng, nghệ sĩ và khách mời; chuẩn hóa hệ thống dữ liệu cùng văn bản thương mại. Đây là không gian cởi mở để những ý tưởng đột phá được phát triển thành kế hoạch có thể thực thi.</p></div>
+            <div class="department-body"><p>Nơi những câu “Hay là mình làm thế này?” được viết thành kế hoạch cụ thể: làm gì, khi nào, tốn bao nhiêu và ai phụ trách.</p><p>Ban lo hồ sơ tài trợ, làm việc với nhãn hàng, nghệ sĩ, khách mời và sắp xếp các giấy tờ liên quan. Nếu bạn thích nghĩ ý tưởng rồi tìm cách biến nó thành chuyện thật, ghé Kế hoạch nhé.</p></div>
           </details>
           <details class="department reveal">
             <summary><span class="department-index">02</span><span class="department-title">BAN TRUYỀN THÔNG</span><span class="department-role">Content · Design · Media</span><span class="department-toggle" aria-hidden="true">+</span></summary>
-            <div class="department-body"><p>Là bộ mặt thương hiệu và cầu nối cảm xúc giữa FEV với công chúng. Thành viên được đào tạo thực hành qua ba mũi nhọn: Content, Design và Media.</p><p>Ban đảm nhiệm thông điệp đa nền tảng, bộ nhận diện và hệ thống ấn phẩm sự kiện; đồng thời làm chủ thiết bị quay chụp để tạo nên hình ảnh và những thước phim recap giàu cảm xúc.</p></div>
+            <div class="department-body"><p>Viết để mọi người biết đến sự kiện, thiết kế để mọi người nhớ, quay chụp để sau này còn có cái mà xem lại. Đó là ba mảng Content, Design và Media của ban.</p><p>Từ bài đăng, bộ nhận diện đến ảnh và video recap, Truyền thông giúp kể câu chuyện của FEV. Bạn sẽ được thực hành cùng đội và học cách dùng thiết bị, chứ không chỉ đứng tạo dáng cạnh máy ảnh.</p></div>
           </details>
           <details class="department reveal">
             <summary><span class="department-index">03</span><span class="department-title">BAN THỰC HIỆN</span><span class="department-role">Vận hành hiện trường</span><span class="department-toggle" aria-hidden="true">+</span></summary>
-            <div class="department-body"><p>Là lực lượng nòng cốt biến kế hoạch trên bản vẽ thành sân khấu ngoài đời thực. Ban thiết lập timeline, dự trù kinh phí, xây dựng checklist, đánh giá rủi ro và chuẩn bị phương án dự phòng.</p><p>Trong ngày sự kiện, đội ngũ quản lý vật tư, điều phối hiện trường và xử lý tình huống phát sinh — môi trường tôi luyện sự chỉn chu, khả năng ứng biến và kỷ luật đồng đội.</p></div>
+            <div class="department-body"><p>Lên lịch chạy chương trình, tính chi phí, kiểm tra vật tư và chuẩn bị phương án dự phòng. Ban Thực hiện giúp những gì trên giấy có mặt đầy đủ ngoài hiện trường.</p><p>Đến ngày sự kiện, ban điều phối công việc và xử lý các tình huống phát sinh. Bạn sẽ học cách quan sát, sắp xếp và giữ bình tĩnh khi bộ đàm gọi tên mình.</p></div>
           </details>
           <details class="department reveal">
             <summary><span class="department-index">04</span><span class="department-title">BAN NHÂN SỰ</span><span class="department-role">Con người &amp; văn hóa</span><span class="department-toggle" aria-hidden="true">+</span></summary>
-            <div class="department-body"><p>Điều phối nguồn lực và kiến tạo nền tảng văn hóa của FEV thông qua hệ thống đánh giá minh bạch, đào tạo nghiệp vụ và lộ trình luân chuyển ban linh hoạt theo định hướng từng cá nhân.</p><p>Ban còn là nơi lắng nghe, chăm lo đời sống tinh thần và duy trì sự kết nối bền chặt, giữ ngọn lửa đoàn kết của mái nhà chung qua nhiều thế hệ.</p></div>
+            <div class="department-body"><p>Sắp xếp nhân sự, theo dõi đóng góp, tổ chức đào tạo và hỗ trợ thành viên tìm hướng phát triển phù hợp, kể cả khi bạn muốn thử sức ở một ban khác.</p><p>Nhân sự cũng là nơi lắng nghe những chuyện vui buồn và giúp các thế hệ FEV giữ liên lạc. Làm sự kiện cần đủ người; ở lại với CLB còn cần thấy mình thuộc về.</p></div>
           </details>
         </div>
 
-        <div class="governance-header"><p class="eyebrow"><span class="square red"></span> HỆ THỐNG QUẢN TRỊ NỘI BỘ</p><span class="edition">DISCIPLINE BUILDS TRUST.</span></div>
+        <div class="governance-header"><p class="eyebrow"><span class="square red"></span> Mấy nguyên tắc làm việc chung</p><span class="edition">Rõ từ đầu, đỡ nhắc nhau về sau.</span></div>
         <div class="governance-grid">
-          <article class="governance-card reveal"><span>01 /</span><h3>HIỆU SUẤT MINH BẠCH</h3><p>Chấm điểm công khai; khen thưởng và đề bạt dựa trên năng suất thực tế cùng mức độ cam kết với dự án.</p></article>
-          <article class="governance-card reveal"><span>02 /</span><h3>KỶ LUẬT THỜI GIAN</h3><p>Đúng giờ là thước đo tối thiểu của sự tôn trọng đồng đội và đối tác trong một ngành mà chậm trễ đồng nghĩa với rủi ro.</p></article>
-          <article class="governance-card reveal"><span>03 /</span><h3>TÀI CHÍNH ĐỘC LẬP</h3><p>Ngân sách, tài trợ, quỹ và chi phí vận hành được kiểm toán, báo cáo thu–chi định kỳ và công khai sau mỗi dự án.</p></article>
-          <article class="governance-card reveal"><span>04 /</span><h3>QUẢN TRỊ KẾ THỪA</h3><p>Ban Điều hành được bầu theo nhiệm kỳ với tín nhiệm tối thiểu 70%; quy trình chuyển giao rõ ràng giúp CLB duy trì tính liên tục.</p></article>
+          <article class="governance-card reveal"><span>01 /</span><h3>Ghi nhận công bằng</h3><p>Điểm đánh giá được công khai. Khen thưởng và đề bạt dựa trên đóng góp thực tế cùng mức độ gắn bó với công việc.</p></article>
+          <article class="governance-card reveal"><span>02 /</span><h3>Hẹn giờ nào, giờ ấy</h3><p>Đúng giờ giúp cả đội chủ động và đối tác yên tâm. Sân khấu không có nút “đợi mình năm phút”, nên tụi mình cùng nhắc nhau giữ giờ.</p></article>
+          <article class="governance-card reveal"><span>03 /</span><h3>Thu chi rõ ràng</h3><p>Ngân sách, tài trợ, quỹ và chi phí được kiểm toán, báo cáo định kỳ và công khai sau mỗi dự án. Tiền đi đâu, sổ sách phải biết.</p></article>
+          <article class="governance-card reveal"><span>04 /</span><h3>Chuyển giao đầy đủ</h3><p>Ban Điều hành được bầu theo nhiệm kỳ với tín nhiệm tối thiểu 70%. Người đi trước bàn giao rõ ràng để đội tiếp theo tiếp tục công việc.</p></article>
         </div>
       </section>
 
       <section class="milestones" id="cot-moc" aria-labelledby="milestones-title">
         <div class="milestones-inner section-shell">
-          <div class="section-topline"><p class="eyebrow"><span class="square red"></span> 04 / CỘT MỐC PHÁT TRIỂN</p><span class="edition">THE ROAD BEHIND US.</span></div>
-          <div class="milestones-heading reveal"><h2 class="display-heading" id="milestones-title">14+ NĂM.<br /><em>MỘT NGỌN LỬA.</em></h2><p>Mỗi cột mốc là một lần FEV thay đổi để trưởng thành — nhưng tinh thần dấn thân và tình đồng đội vẫn luôn ở lại.</p></div>
+          <div class="section-topline"><p class="eyebrow"><span class="square red"></span> 04 / Nhìn lại một chút</p><span class="edition">Hồi đó nhà mình thế này.</span></div>
+          <div class="milestones-heading reveal"><h2 class="display-heading" id="milestones-title">14+ năm.<br /><em>Nhiều chuyện kể.</em></h2><p>FEV đã thay đổi qua từng giai đoạn. Nhìn lại mới thấy tụi mình đi được khá xa, nhờ rất nhiều người cùng góp sức.</p></div>
           <ol class="timeline-list">
-            <li class="timeline-row reveal"><time datetime="2012">2012</time><h3>THÀNH LẬP &amp; XÂY NỀN TẢNG</h3><p>Khởi xướng bởi 7 sinh viên và Mentor Đoàn Khắc Hưng ngày 22/06/2012. Biểu tượng Thanh gươm &amp; Chiếc khiên ra đời cùng các dự án tiền đề: Xuân Ấm Áp, Trung Thu Ấm Áp và Water Rocket.</p></li>
-            <li class="timeline-row reveal"><time datetime="2015">2015</time><h3>CHUẨN HÓA NHẬN DIỆN</h3><p>Sắc tím đặc trưng và biểu tượng Vương miện Quân chủ bài đánh dấu bước chuyển từ câu lạc bộ sở thích thành đơn vị tổ chức sự kiện chủ lực tại FPTU.</p></li>
-            <li class="timeline-row reveal"><time>2017—2019</time><h3>TÁI CƠ CẤU &amp; TÔI LUYỆN</h3><p>FEV tái cấu trúc quy trình, củng cố đội ngũ nòng cốt và định hình rõ hơn các giá trị về sự kiên định, trách nhiệm cùng bản lĩnh tập thể.</p></li>
-            <li class="timeline-row reveal"><time datetime="2020">2020</time><h3>TĂNG TRƯỞNG QUY MÔ</h3><p>Trở lại mạnh mẽ với những sự kiện quy mô hàng nghìn người như F-Camp, FPTU First Step và mạng lưới hợp tác chiến lược cùng các CLB tại FPTU.</p></li>
-            <li class="timeline-row reveal"><time>2021—NAY</time><h3>CHUYỂN ĐỔI &amp; NÂNG CHUẨN</h3><p>Linh hoạt thích ứng, ứng dụng mô hình sự kiện và công nghệ quản trị mới; đồng thời chuẩn hóa đào tạo thực chiến để bồi dưỡng những thế hệ kế thừa vững chuyên môn.</p></li>
+            <li class="timeline-row reveal"><time datetime="2012">2012</time><h3>FEV có mặt!</h3><p>Ngày 22/06/2012, 7 sinh viên cùng Mentor Đoàn Khắc Hưng đặt những viên gạch đầu tiên. Biểu tượng Thanh gươm &amp; Chiếc khiên xuất hiện cùng các dự án Xuân Ấm Áp, Trung Thu Ấm Áp và Water Rocket.</p></li>
+            <li class="timeline-row reveal"><time datetime="2015">2015</time><h3>Nhận ra nhau bằng màu tím</h3><p>FEV chọn sắc tím và biểu tượng Vương miện Quân chủ bài. Từ một câu lạc bộ cùng sở thích, đội dần đảm nhận nhiều công việc tổ chức sự kiện hơn tại FPTU.</p></li>
+            <li class="timeline-row reveal"><time>2017—2019</time><h3>Sắp xếp lại để làm tốt hơn</h3><p>Tụi mình điều chỉnh cách làm việc, củng cố đội ngũ và cùng học cách chịu trách nhiệm với phần việc của mình. Những bài học này vẫn theo FEV đến hôm nay.</p></li>
+            <li class="timeline-row reveal"><time datetime="2020">2020</time><h3>Sân khấu lớn dần</h3><p>FEV tham gia các chương trình quy tụ hàng nghìn người như F-Camp, FPTU First Step và tăng cường hợp tác với các CLB tại FPTU.</p></li>
+            <li class="timeline-row reveal"><time>2021—nay</time><h3>Vừa làm, vừa học tiếp</h3><p>FEV thử các hình thức sự kiện, công cụ quản lý mới và cập nhật việc đào tạo thành viên. Kinh nghiệm của khóa trước được truyền lại để khóa sau có chỗ bắt đầu.</p></li>
           </ol>
         </div>
       </section>
 
       <section class="journey section-shell" id="hanh-trinh" aria-labelledby="journey-title">
-        <div class="section-topline"><p class="eyebrow"><span class="square purple"></span> 05 / HÀNH TRÌNH TIẾP NỐI</p><a class="eyebrow small-link" href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">NHẬT KÝ FEV <span aria-hidden="true">↗</span></a></div>
-        <div class="section-heading-row reveal"><h2 class="display-heading" id="journey-title">CÙNG VIẾT TIẾP<br /><em>CHƯƠNG MỚI.</em></h2><p>Mỗi thế hệ mang một màu sắc.<br />Cùng nhau, chúng mình tạo nên FEV.</p></div>
+        <div class="section-topline"><p class="eyebrow"><span class="square purple"></span> 05 / Các thế hệ FEV</p><a class="eyebrow small-link" href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">Ghé nhật ký FEV <span aria-hidden="true">↗</span></a></div>
+        <div class="section-heading-row reveal"><h2 class="display-heading" id="journey-title">Nhà mình<br /><em>thêm bạn mới.</em></h2><p>Mỗi khóa mang đến những gương mặt và ý tưởng khác nhau.<br />Rồi ai cũng có một câu chuyện với FEV.</p></div>
         <article class="featured-story reveal">
           <a class="story-image" href="https://docs.google.com/forms/d/e/1FAIpQLSe596upLPBn-R7q9aidfxryYFrqIOWpB2mGQGD37nQCfU1WLw/viewform" target="_blank" rel="noopener noreferrer" aria-label="Mở form đăng ký cộng tác viên FEV K22">
             <img src="./assets/cover-k22.jpg" width="2355" height="1298" alt="Ấn phẩm FEV K22 màu tím và vàng với biểu tượng bàn cờ và logo vương miện FEV" loading="lazy" decoding="async" />
             <span class="image-tag">FEV / K22</span><span class="image-expand" aria-hidden="true">↗</span>
           </a>
-          <div class="story-copy"><p class="eyebrow"><span class="square red"></span> CON NGƯỜI FEV</p><h3>MẢNH GHÉP MỚI.<br /><em>CHẤT FEV.</em></h3><p>Một hành trình được tiếp nối bằng những ý tưởng mới, những cuộc gặp gỡ mới và tinh thần luôn sẵn sàng của cộng tác viên K22.</p><a class="text-link" href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">KHÁM PHÁ TRÊN FANPAGE <span aria-hidden="true">↗</span></a><span class="story-number" aria-hidden="true">22</span></div>
+          <div class="story-copy"><p class="eyebrow"><span class="square red"></span> Gặp gỡ K22</p><h3>Bạn mới.<br /><em>Chuyện mới.</em></h3><p>Cộng tác viên K22 mang đến những ý tưởng và cách nhìn mới. Cùng làm sự kiện rồi mới biết: từ người lạ thành đồng đội có khi chỉ cách nhau một buổi chuẩn bị.</p><a class="text-link" href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">Gặp K22 trên fanpage <span aria-hidden="true">↗</span></a><span class="story-number" aria-hidden="true">22</span></div>
         </article>
       </section>
 
       <section class="contact" id="ket-noi" aria-labelledby="contact-title">
         <div class="contact-inner section-shell">
-          <div class="section-topline"><p class="eyebrow"><span class="square"></span> 06 / CÙNG TẠO NÊN ĐIỀU KHÁC BIỆT</p><span class="edition">YOUR NEXT CHAPTER STARTS HERE.</span></div>
-          <div class="contact-main"><h2 id="contact-title">LÀM ĐIỀU<br /><em>ĐÁNG NHỚ.</em></h2><a class="contact-arrow" href="mailto:fpteventclub@gmail.com" aria-label="Gửi email hợp tác tới FPT Event Club"><span aria-hidden="true">↗</span></a></div>
-          <div class="contact-bottom"><p>Bạn có một ý tưởng, muốn đồng hành<br />hay chỉ muốn nói lời chào? FEV luôn sẵn sàng.</p><div class="contact-actions"><a href="mailto:fpteventclub@gmail.com">fpteventclub@gmail.com <span aria-hidden="true">↗</span></a><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">NHẮN CHO CHÚNG MÌNH <span aria-hidden="true">↗</span></a></div></div>
+          <div class="section-topline"><p class="eyebrow"><span class="square"></span> 06 / Kết nối với FEV</p><span class="edition">Bắt đầu bằng một lời chào.</span></div>
+          <div class="contact-main"><h2 id="contact-title">Có gì hay,<br /><em>kể tụi mình.</em></h2><a class="contact-arrow" href="mailto:fpteventclub@gmail.com" aria-label="Gửi email hợp tác tới FPT Event Club"><span aria-hidden="true">↗</span></a></div>
+          <div class="contact-bottom"><p>Bạn muốn cùng làm một sự kiện, tìm hiểu CLB<br />hay đơn giản là chào một tiếng? Cứ nhắn FEV nhé.</p><div class="contact-actions"><a href="mailto:fpteventclub@gmail.com">fpteventclub@gmail.com <span aria-hidden="true">↗</span></a><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">Nhắn tụi mình nhé <span aria-hidden="true">↗</span></a></div></div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer section-shell">
-      <div class="footer-top"><a class="brand" href="#trang-chu" aria-label="Về đầu trang"><img src="./assets/fev-logo.png" width="76" height="44" alt="Logo FEV" loading="lazy" /><span class="brand-label">FPT EVENT CLUB<span>THE WAY WE WENT</span></span></a><div class="footer-socials"><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">FACEBOOK ↗</a><a href="https://www.instagram.com/fev_thewaywewent/" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗</a><a href="mailto:fpteventclub@gmail.com">EMAIL ↗</a><a href="./chinh-sach-quyen-rieng-tu.html">QUYỀN RIÊNG TƯ</a></div></div>
+      <div class="footer-top"><a class="brand" href="#trang-chu" aria-label="Về đầu trang"><img src="./assets/fev-logo.png" width="76" height="44" alt="Logo FEV" loading="lazy" /><span class="brand-label">FPT EVENT CLUB<span>THE WAY WE WENT</span></span></a><div class="footer-socials"><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">FACEBOOK ↗</a><a href="https://www.instagram.com/fev_thewaywewent/" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗</a><a href="mailto:fpteventclub@gmail.com">EMAIL ↗</a><a href="./chinh-sach-quyen-rieng-tu.html">Quyền riêng tư</a></div></div>
       <div class="footer-wordmark" aria-hidden="true">THE WAY WE WENT<span>✳</span></div>
-      <div class="footer-bottom"><span>© <span id="year">2026</span> FPT EVENT CLUB.</span><span>MADE OF MOMENTS. BUILT BY US.</span><a href="#trang-chu">LÊN ĐẦU TRANG ↑</a></div>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> FPT EVENT CLUB.</span><span>MADE OF MOMENTS. BUILT BY US.</span><a href="#trang-chu">Lên đầu trang ↑</a></div>
     </footer>
   </body>
 </html>

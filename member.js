@@ -107,7 +107,7 @@ async function refreshAuth() {
     currentUser = null;
     currentProfile = null;
     syncHeader();
-    showStatus('Chưa cấu hình Supabase URL và anon key cho website.', 'error');
+    showStatus('Trang đăng nhập đang được thiết lập. Bạn vui lòng quay lại sau.', 'error');
     return;
   }
   const { data, error } = await supabase.auth.getUser();
@@ -132,7 +132,7 @@ async function refreshAuth() {
       currentUser = null;
       currentProfile = null;
       showStatus(passwordLoginPending
-        ? 'Form email và mật khẩu chỉ dành cho tài khoản quản trị được CLB cấp quyền.'
+        ? 'Email/Mật khẩu chỉ dành cho quản trị viên được CLB cấp quyền. Nếu cần hỗ trợ, bạn liên hệ Ban Chủ nhiệm nhé.'
         : 'Chỉ tài khoản Google @fpt.edu.vn được phép đăng nhập.', 'error');
     }
   }
@@ -204,13 +204,13 @@ select('[data-password-toggle]')?.addEventListener('click', (event) => {
   const input = select('#member-password');
   const shown = input.type === 'password';
   input.type = shown ? 'text' : 'password';
-  event.currentTarget.textContent = shown ? 'ẨN' : 'HIỆN';
+  event.currentTarget.textContent = shown ? 'Ẩn' : 'Hiện';
   event.currentTarget.setAttribute('aria-pressed', String(shown));
   event.currentTarget.setAttribute('aria-label', shown ? 'Ẩn mật khẩu' : 'Hiện mật khẩu');
 });
 
 googleButton?.addEventListener('click', async () => {
-  if (!supabase) { showStatus('Chưa cấu hình Supabase.', 'error'); return; }
+  if (!supabase) { showStatus('Trang đăng nhập chưa sẵn sàng. Bạn vui lòng quay lại sau.', 'error'); return; }
   googleButton.disabled = true;
   showStatus('Đang chuyển đến Google…');
   const redirect = new URL('./dang-nhap.html', import.meta.url);
@@ -256,7 +256,7 @@ loginForm?.addEventListener('submit', async (event) => {
       currentUser = null;
       currentProfile = null;
       syncHeader();
-      showStatus('Form email và mật khẩu chỉ dành cho tài khoản quản trị được CLB cấp quyền.', 'error');
+      showStatus('Email/Mật khẩu chỉ dành cho quản trị viên được CLB cấp quyền. Nếu cần hỗ trợ, bạn liên hệ Ban Chủ nhiệm nhé.', 'error');
       submitButton.disabled = false;
       return;
     }

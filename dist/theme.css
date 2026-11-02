@@ -1,0 +1,245 @@
+/* FEV: a friendlier reading rhythm, shared by the public site and member portal. */
+:root {
+  --font-body: 'Lato', 'Segoe UI', Arial, sans-serif;
+  --font-display: 'Poppins', 'Lato', Arial, sans-serif;
+  --muted: #c1b8c8;
+}
+
+body { font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+input, select, textarea { font-family: inherit; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+.hero h1, .brand-label, .footer-wordmark, .ticker-track, .stat-number,
+.events-year-number, .events-range strong, .login-visual > span,
+.recruitment-hero-mark, .events-hero-mark, .story-number { font-family: var(--font-display); }
+.brand-label { font-size: 11px; letter-spacing: .08em; }
+.brand-label > span { letter-spacing: .1em; }
+.hero h1 { font-weight: 800; letter-spacing: -.055em; line-height: .98; }
+.hero h1 .title-second { margin-top: 0; }
+.hero-signature p { font-size: 13px; letter-spacing: .04em; }
+.hero-intro > p:last-child { font-size: 16px; line-height: 1.65; }
+.hero-feature { border-radius: 12px; }
+.hero-feature > img { border-radius: 6px; }
+.feature-copy strong { font-size: 14px; }
+.feature-small { font-size: 12px; }
+.feature-copy .eyebrow { font-size: 10px; letter-spacing: .06em; }
+.hero-feature { max-width: 390px; }
+.eyebrow, .edition { font-size: 11px; letter-spacing: .08em; font-weight: 700; }
+.hero-eyebrow { font-size: 11px; letter-spacing: .13em; }
+.hero-intro .eyebrow { font-size: 11px; letter-spacing: .06em; }
+.header-contact, .menu-label { font-size: 13px; letter-spacing: .02em; }
+.header-contact { gap: 12px; }
+.menu-link { font-weight: 700; letter-spacing: -.025em; }
+.menu-link-recruitment { font-size: clamp(24px, 4vw, 58px); }
+.menu-footer, .footer-socials { font-size: 12px; letter-spacing: .03em; }
+.footer-bottom { font-size: 11px; letter-spacing: .03em; }
+.text-link, .scroll-link, .contact-actions a:last-child { font-size: 12px; letter-spacing: .03em; }
+.display-heading { font-size: clamp(36px, 4.6vw, 74px); line-height: 1.14; letter-spacing: -.025em; font-weight: 900; }
+.display-heading em, .contact-main h2 em, .events-cta h2 em { font-style: normal; font-weight: 900; }
+.about-copy .lead { font-size: clamp(19px, 1.55vw, 23px); line-height: 1.65; letter-spacing: 0; }
+.about-copy > p:not(.lead), .identity-copy > p:not(.identity-lead),
+.organization-intro > p, .milestones-heading > p, .story-copy > p:not(.eyebrow),
+.section-heading-row > p { font-size: 16px; line-height: 1.8; }
+.about-copy > p:not(.lead) { max-width: 60ch; }
+.identity-lead { font-size: clamp(20px, 1.65vw, 25px); line-height: 1.6; letter-spacing: 0; }
+.identity-copy > p:not(.identity-lead) { color: #514559; }
+.capability-header > p:last-child { font-size: 14px; }
+.stats { border-radius: 12px; overflow: hidden; }
+.stat-label { font-size: 12px; letter-spacing: .03em; line-height: 1.5; }
+.stat-detail { font-size: 14px; line-height: 1.75; }
+.vision-card { border-radius: 14px; }
+.vision-card > p:last-child { font-size: clamp(20px, 1.8vw, 26px); letter-spacing: 0; }
+.mission-card h3 { font-size: 18px; line-height: 1.4; }
+.mission-card p { font-size: 15px; line-height: 1.75; color: #574b5e; }
+.value-list span { font-size: 12px; letter-spacing: .03em; }
+.department-title { font-weight: 700; letter-spacing: -.02em; }
+.department-role { font-size: 13px; letter-spacing: 0; text-transform: none; }
+.department-body p { font-size: 16px; line-height: 1.8; }
+.governance-card h3 { font-size: 22px; }
+.governance-card p { font-size: 15px; line-height: 1.8; }
+.timeline-row h3 { font-size: 19px; line-height: 1.45; }
+.timeline-row p { font-size: 15px; line-height: 1.8; }
+.story-copy h3 { font-weight: 900; line-height: 1.15; letter-spacing: -.025em; }
+.story-copy h3 em { font-style: normal; font-weight: 900; }
+.image-tag { font-size: 11px; letter-spacing: .05em; border-radius: 5px; }
+.spirit-row h3 { font-weight: 700; letter-spacing: -.02em; }
+.spirit-row p, .contact-bottom > p { font-size: 15px; line-height: 1.75; }
+.contact-main h2 { font-weight: 900; line-height: 1.08; letter-spacing: -.035em; }
+.contact-actions a:first-child { font-size: 20px; letter-spacing: 0; }
+
+/* Buttons and fields should feel like an invitation, with readable labels. */
+.member-login, .member-account summary { font-size: 13px; letter-spacing: .02em; }
+.member-login { border-radius: 24px; }
+.member-account-panel { border-radius: 12px; }
+.member-account-panel p, .member-account-panel a, .member-account-panel button { font-size: 14px; }
+.member-button { font-size: 15px; font-weight: 700; letter-spacing: .015em; border-radius: 8px; }
+.member-field label { font-size: 15px; font-weight: 700; }
+.member-field input, .member-field select, .member-field textarea { font-size: 16px; border-radius: 8px; }
+.member-field .member-field-hint, .member-field-hint { font-size: 13px; line-height: 1.6; }
+.member-form-status { font-size: 15px; line-height: 1.65; }
+.password-field button { font-size: 12px; letter-spacing: .02em; }
+.login-story h1, .recruitment-hero h1, .admin-hero h1, .privacy-heading h1 {
+  font-weight: 900; line-height: 1.13; letter-spacing: -.025em;
+}
+.login-story h1 em, .recruitment-hero h1 em, .admin-hero h1 em, .privacy-heading h1 em {
+  font-style: normal; font-weight: 900;
+}
+.login-intro { font-size: 17px; line-height: 1.8; }
+.login-card { border-radius: 16px; }
+.login-card h2 { font-size: 32px; font-weight: 900; line-height: 1.2; letter-spacing: -.02em; }
+.login-card-intro { font-size: 16px; line-height: 1.7; }
+.login-privacy-note, .login-help, .member-help { font-size: 13px; line-height: 1.7; }
+.login-divider { font-size: 12px; letter-spacing: .03em; white-space: normal; text-align: center; }
+.login-divider span { flex: 0 1 auto; }
+.login-divider::before, .login-divider::after { min-width: 12px; }
+.login-visual > p { font-size: 12px; letter-spacing: .04em; }
+
+.events-hero h1 { font-size: clamp(55px, 8.5vw, 136px); line-height: 1.08; letter-spacing: -.035em; font-weight: 900; }
+.events-hero h1 em { font-style: normal; font-weight: 900; }
+.events-hero-bottom > p, .recruitment-hero-bottom > p { font-size: 17px; line-height: 1.75; }
+.events-range span, .recruitment-hero-bottom > span { font-size: 12px; letter-spacing: .04em; }
+.events-tool { font-size: 13px; letter-spacing: .02em; }
+.events-tool input, .events-tool select { font-size: 16px; border-radius: 8px; }
+.year-switcher { border-radius: 10px; overflow: hidden; }
+.year-filter > small { font-size: 11px; letter-spacing: .03em; }
+.year-filter:focus-visible { outline: 2px solid var(--paper); outline-offset: -4px; }
+.events-status { font-size: 14px; letter-spacing: 0; }
+.events-retry { font-size: 14px; letter-spacing: .02em; border-radius: 8px; }
+.events-empty { font-size: 17px; line-height: 1.75; }
+.event-row h3 { font-size: clamp(19px, 1.7vw, 26px); line-height: 1.4; letter-spacing: -.01em; }
+.event-theme { font-size: 14px; letter-spacing: 0; text-transform: none; }
+.event-category { font-size: 12px; letter-spacing: .02em; }
+.event-link-status:not(:empty) { font-size: 13px; }
+.events-cta h2 { line-height: 1.1; letter-spacing: -.025em; font-weight: 900; }
+.events-cta a { font-size: 13px; letter-spacing: .02em; }
+
+.recruitment-section-top h2 { line-height: 1.2; letter-spacing: -.025em; font-weight: 900; }
+.recruitment-count { font-size: 13px; }
+.member-gate, .member-welcome { border-radius: 10px; }
+.member-gate > p, .member-welcome > p { font-size: 15px; line-height: 1.7; }
+.member-gate > a, .member-welcome > a { font-size: 13px; letter-spacing: .02em; }
+.recruitment-card { border-radius: 12px; }
+.recruitment-card h3 { font-weight: 900; line-height: 1.2; letter-spacing: -.02em; }
+.recruitment-card-description, .recruitment-card > p { font-size: 15px; line-height: 1.75; }
+.recruitment-roles > span { font-size: 13px; border-radius: 5px; }
+.recruitment-deadline { font-size: 14px; }
+.recruitment-empty > p { font-size: 15px; line-height: 1.75; }
+.application-item { border-radius: 10px; }
+.application-item h3 { line-height: 1.35; letter-spacing: -.015em; }
+.application-item-meta, .application-item-message { font-size: 14px; }
+.application-status { font-size: 12px; letter-spacing: .01em; }
+.application-dialog { border-radius: 16px; }
+.application-dialog h2 { font-weight: 900; line-height: 1.25; letter-spacing: -.02em; }
+.application-dialog-heading .eyebrow { font-size: 11px; letter-spacing: .04em; }
+.application-account { font-size: 14px; }
+.application-dialog-intro, .application-success > p { font-size: 15px; line-height: 1.75; }
+.member-signoff > p:last-child { font-size: clamp(32px, 5.5vw, 80px); font-weight: 900; letter-spacing: -.025em; }
+.member-signoff em { font-style: normal; font-weight: 900; }
+
+.admin-hero > p:last-child, .admin-access { font-size: 16px; }
+.admin-section-heading h2 { letter-spacing: -.025em; line-height: 1.2; font-weight: 900; }
+.admin-section-heading > div > p:last-child { font-size: 15px; }
+.admin-controls label, .admin-controls input, .admin-controls select { font-size: 14px; }
+.admin-controls input, .admin-controls select { border-radius: 7px; }
+.admin-event-card, .admin-application-card { border-radius: 12px; }
+.admin-card-meta, .admin-card-description, .admin-empty, .admin-application-contact { font-size: 14px; }
+.admin-tag, .admin-status-row label { font-size: 12px; }
+.admin-card-actions button, .admin-text-button, .admin-status-row button { font-size: 13px; letter-spacing: .01em; border-radius: 7px; }
+.admin-status-row select, .admin-check-row label, .admin-departments label { font-size: 14px; }
+.admin-departments { border-radius: 8px; }
+.admin-departments legend { font-size: 14px; }
+
+.privacy-heading > p:not(.eyebrow) { font-size: 17px; }
+.privacy-heading > span, .privacy-index { font-size: 12px; letter-spacing: .04em; }
+.privacy-aside { font-size: 14px; }
+.privacy-aside p { font-size: 12px; letter-spacing: .04em; }
+.privacy-content h2 { font-weight: 900; letter-spacing: -.02em; line-height: 1.3; }
+.privacy-content section > p:not(.privacy-index), .privacy-content li { font-size: 16px; line-height: 1.85; }
+
+@media (max-width: 1100px) {
+  .header-right { gap: 20px; }
+  .hero-feature { max-width: 340px; }
+  .hero-intro > p:last-child { font-size: 15px; }
+  .feature-copy strong { font-size: 12px; }
+  .feature-small { font-size: 11px; }
+  .stat summary { padding-inline: 20px; }
+}
+
+@media (max-width: 760px) {
+  .brand-label { font-size: 9px; }
+  .brand-label > span { font-size: 6px; }
+  .member-login, .member-account summary { font-size: 12px; letter-spacing: 0; }
+  .hero h1 { font-size: clamp(48px, 12.5vw, 94px); }
+  .hero-eyebrow, .eyebrow { font-size: 10px; letter-spacing: .06em; }
+  .hero-signature p { font-size: 11px; letter-spacing: .02em; }
+  .hero-intro .eyebrow { font-size: 10px; }
+  .hero-intro > p:last-child { font-size: 15px; }
+  .hero-feature { max-width: none; }
+  .feature-copy .eyebrow { font-size: 9px; }
+  .feature-copy strong { font-size: 14px; }
+  .feature-small { font-size: 12px; }
+  .display-heading { font-size: clamp(36px, 9vw, 58px); letter-spacing: -.02em; }
+  .about-copy { padding-left: 22px; }
+  .about-copy .lead { font-size: 19px; }
+  .about-copy > p:not(.lead), .identity-copy > p:not(.identity-lead),
+  .organization-intro > p, .milestones-heading > p, .story-copy > p:not(.eyebrow),
+  .section-heading-row > p { font-size: 16px; }
+  .capability-header { display: block; }
+  .capability-header > p:last-child { margin-top: 12px; }
+  .stats { margin-top: 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat { padding: 0; }
+  .stat summary { min-height: 190px; padding: 24px 18px; }
+  .stat:last-child { grid-column: 1 / -1; }
+  .stat-label { font-size: 11px; }
+  .stat-detail { padding: 18px; font-size: 14px; }
+  .mission-card h3 { font-size: 18px; }
+  .mission-card p, .governance-card p, .timeline-row p { font-size: 15px; }
+  .department-title { font-size: 24px; }
+  .department-role { font-size: 12px; }
+  .department-body { margin-left: 44px; }
+  .department-body p { font-size: 15px; }
+  .timeline-row h3 { font-size: 17px; }
+  .story-copy h3 { font-size: 35px; }
+  .text-link, .small-link { font-size: 12px; letter-spacing: .02em; }
+  .spirit-row h3 { font-size: 29px; }
+  .spirit-row p, .contact-bottom > p { font-size: 15px; }
+  .contact-main h2 { font-size: clamp(36px, 8.5vw, 62px); }
+  .contact-actions a:first-child { font-size: 18px; }
+  .footer-socials { font-size: 12px; gap: 18px; }
+  .footer-bottom { font-size: 10px; }
+  .menu-link, .menu-link-recruitment { font-size: clamp(26px, 7vw, 40px); line-height: 1.3; }
+  .menu-footer { font-size: 12px; }
+  .login-story h1 { font-size: clamp(42px, 10.8vw, 68px); }
+  .login-intro { font-size: 16px; }
+  .login-card h2 { font-size: 30px; }
+  .login-card-intro { font-size: 16px; }
+  .member-field label { font-size: 15px; }
+  .events-hero h1 { font-size: clamp(44px, 11.5vw, 86px); }
+  .events-hero-bottom > p, .recruitment-hero-bottom > p { font-size: 16px; }
+  .year-switcher { border-radius: 0; overflow-x: auto; }
+  .events-status { font-size: 14px; }
+  .event-row h3 { font-size: 21px; }
+  .event-theme { font-size: 14px; }
+  .events-year-heading h2 { font-size: 23px; }
+  .recruitment-hero h1 { font-size: clamp(40px, 10vw, 65px); }
+  .recruitment-hero-bottom > span { font-size: 11px; }
+  .member-gate > p, .member-welcome > p { font-size: 15px; }
+  .recruitment-card h3 { font-size: 28px; }
+  .recruitment-empty > p, .application-item-message { font-size: 15px; }
+  .application-dialog h2 { font-size: 27px; }
+  .member-signoff > p:last-child { font-size: 9vw; }
+  .admin-section-heading h2 { font-size: 34px; }
+  .privacy-heading > p:not(.eyebrow) { font-size: 16px; }
+  .privacy-aside { font-size: 14px; }
+  .privacy-content section > p:not(.privacy-index), .privacy-content li { font-size: 16px; }
+}
+
+@media (max-width: 430px) {
+  .header-right { gap: 12px; }
+  .brand-label { font-size: 8px; }
+  .brand-label > span { font-size: 5px; }
+  .member-login { font-size: 11px; }
+  .hero-signature { gap: 8px; }
+  .signature-line { width: 14px; }
+  .hero-signature p { font-size: 10px; }
+}

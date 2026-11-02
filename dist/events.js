@@ -82,7 +82,7 @@ if (archive) {
     if (!authorizedUserId) return;
     const requestingUserId = authorizedUserId;
     button.disabled = true;
-    linkStatus.textContent = 'Đang lấy liên kết đăng ký...';
+    linkStatus.textContent = 'Đang mở liên kết đăng ký…';
     try {
       const { data, error } = await supabase.rpc('fev_event_registration_link', {
         p_event_id: event.id,
@@ -102,7 +102,7 @@ if (archive) {
       link.textContent = '↗';
       link.setAttribute('aria-label', `Mở đăng ký ${event.title} trong tab mới`);
       button.replaceWith(link);
-      linkStatus.textContent = 'Liên kết đã sẵn sàng. Nhấn mũi tên để mở tab mới.';
+      linkStatus.textContent = 'Có link rồi! Nhấn mũi tên để mở trong tab mới nhé.';
       link.focus();
     } catch (error) {
       console.error('Không lấy được liên kết đăng ký sự kiện:', error);
@@ -190,14 +190,14 @@ if (archive) {
     }
     renderedOnce = true;
     yearNumber.textContent = selectedYear === 'all' ? 'FEV' : selectedYear;
-    resultTitle.textContent = `${numberFormat.format(filtered.length)} DẤU ẤN SỰ KIỆN`;
+    resultTitle.textContent = `${numberFormat.format(filtered.length)} sự kiện`;
     results.hidden = filtered.length === 0;
     empty.hidden = filtered.length > 0;
     empty.textContent = events.length === 0
-      ? 'Kho sự kiện đang được cập nhật. Vui lòng quay lại sau.'
+      ? 'Tụi mình đang bổ sung sự kiện. Bạn ghé lại sau nhé.'
       : category.value && events.every((event) => !event.category)
-        ? 'Danh mục sự kiện đang được cập nhật. Vui lòng quay lại sau.'
-        : 'Chưa có sự kiện phù hợp với bộ lọc này.';
+        ? 'Tụi mình đang phân loại sự kiện. Bạn thử tìm theo tên hoặc năm trước nhé.'
+        : 'Chưa thấy sự kiện bạn tìm. Bạn thử đổi tên, năm hoặc loại sự kiện nhé.';
     status.textContent = `Hiển thị ${numberFormat.format(filtered.length)} trong ${numberFormat.format(events.length)} sự kiện.`;
   }
 
@@ -223,19 +223,19 @@ if (archive) {
 
   async function loadEvents() {
     retry.hidden = true;
-    status.textContent = 'Đang tải kho sự kiện...';
+    status.textContent = 'Đang mở kho sự kiện…';
     try {
       if (!isSupabaseConfigured) throw new Error('Supabase chưa được cấu hình.');
       events = await fetchAllEvents();
       loaded = true;
       const count = numberFormat.format(events.length);
       heroCount.textContent = count;
-      totalLabel.textContent = `${count} SỰ KIỆN`;
+      totalLabel.textContent = `${count} sự kiện`;
       footerCount.textContent = count;
       yearButtons.forEach((button) => {
         const year = button.dataset.yearFilter;
         const amount = year === 'all' ? events.length : events.filter((event) => String(event.year) === year).length;
-        button.querySelector('small').textContent = `${numberFormat.format(amount)} SỰ KIỆN`;
+        button.querySelector('small').textContent = `${numberFormat.format(amount)} sự kiện`;
       });
       render();
     } catch (error) {

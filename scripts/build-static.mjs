@@ -7,12 +7,15 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const files = [
   '.nojekyll', 'CNAME', 'index.html', 'su-kien.html', 'dang-nhap.html',
   'chinh-sach-quyen-rieng-tu.html', 'privacy.css',
-  'tuyen-ban-to-chuc.html', 'quan-tri.html', 'styles.css', 'app.js',
+  'tuyen-ban-to-chuc.html', 'quan-tri.html', 'styles.css', 'fonts.css', 'theme.css', 'app.js',
   'member.css', 'member.js', 'events.css', 'events.js',
   'recruitment.css', 'recruitment.js', 'admin.css', 'admin.js',
   'robots.txt', 'sitemap.xml',
-  'assets/fev-logo.png', 'assets/cover-k22.jpg', 'assets/montserrat.woff2',
-  'assets/montserrat-italic.woff2'
+  'assets/fev-logo.png', 'assets/cover-k22.jpg',
+  'assets/lato-regular.woff2', 'assets/lato-bold.woff2', 'assets/lato-black.woff2',
+  'assets/lato-italic.woff2', 'assets/poppins-extrabold.woff2',
+  'assets/poppins-extrabold-italic.woff2',
+  'assets/Lato-OFL.txt', 'assets/Poppins-OFL.txt', 'assets/FONT-SOURCES.md'
 ];
 for (const file of files) {
   const destination = resolve(root, 'dist', file);

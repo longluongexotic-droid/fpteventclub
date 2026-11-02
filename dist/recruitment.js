@@ -81,7 +81,7 @@ function renderAccess() {
     gateText.textContent = 'Tài khoản này chưa được cấp quyền thành viên FEV. Vui lòng liên hệ Ban Chủ nhiệm để được hỗ trợ.';
     gateLink.hidden = true;
   } else {
-    gateText.textContent = 'Đăng nhập tài khoản thành viên để đăng ký Ban Tổ chức.';
+    gateText.textContent = 'Bạn đăng nhập bằng tài khoản thành viên FEV để nộp đơn Ban Tổ chức nhé.';
     gateLink.hidden = false;
   }
 
@@ -98,13 +98,13 @@ function renderEvents() {
   $('[data-recruitment-empty]').hidden = !state.eventsLoaded
     || state.eventsError || state.events.length !== 0;
   $('[data-recruitment-count]').textContent = state.events.length
-    ? `${state.events.length} SỰ KIỆN` : '';
+    ? `${state.events.length} sự kiện` : '';
 
   for (const event of state.events) {
     const card = node('article', 'recruitment-card');
     card.dataset.eventId = event.id;
     card.tabIndex = -1;
-    card.append(node('p', 'eyebrow', 'FEV / ĐANG TUYỂN'));
+    card.append(node('p', 'eyebrow', 'FEV / ĐANG TÌM ĐỒNG ĐỘI'));
     card.append(node('h3', '', event.title));
     card.append(node('p', 'recruitment-card-description', event.description || ''));
 
@@ -123,16 +123,16 @@ function renderEvents() {
     button.type = 'button';
     const submitted = applicationFor(event.id);
     if (submitted) {
-      button.textContent = `ĐÃ NỘP ĐƠN · ${submitted.status}`;
+      button.textContent = `Đã nộp đơn · ${submitted.status}`;
       button.disabled = true;
     } else if (!state.user) {
-      button.textContent = 'ĐĂNG NHẬP ĐỂ ỨNG TUYỂN ↗';
+      button.textContent = 'Đăng nhập để ứng tuyển ↗';
       button.addEventListener('click', () => location.assign(loginUrl(event.id)));
     } else if (!canApply()) {
-      button.textContent = 'CHỈ DÀNH CHO THÀNH VIÊN FEV';
+      button.textContent = 'Dành cho thành viên FEV';
       button.disabled = true;
     } else {
-      button.textContent = state.applicationsLoading ? 'ĐANG KIỂM TRA ĐƠN…' : 'NỘP ĐƠN ỨNG TUYỂN ↗';
+      button.textContent = state.applicationsLoading ? 'Đang kiểm tra đơn…' : 'Nộp đơn ứng tuyển ↗';
       button.disabled = state.applicationsLoading;
       button.addEventListener('click', () => openApplication(event));
     }
@@ -161,7 +161,7 @@ function renderApplications() {
 }
 
 async function loadEvents() {
-  showStatus('[data-recruitment-status]', 'Đang tải thông tin tuyển Ban Tổ chức…');
+  showStatus('[data-recruitment-status]', 'Đang xem sự kiện nào cần thêm đồng đội…');
   const { data, error } = await supabase.from('events')
     .select('id,title,description,application_deadline,recruitment_departments,is_recruiting')
     .eq('is_published', true)
@@ -190,7 +190,7 @@ async function loadApplications() {
   const userId = state.user.id;
   state.applicationsLoading = true;
   renderEvents();
-  showStatus('[data-applications-status]', 'Đang tải đơn ứng tuyển…');
+  showStatus('[data-applications-status]', 'Đang tìm đơn của bạn…');
   const { data, error } = await supabase.from('recruitment_applications')
     .select('id,event_id,selected_department,status,created_at,events(title)')
     .eq('user_id', userId)

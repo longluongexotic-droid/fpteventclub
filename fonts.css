@@ -1,0 +1,7 @@
+/* Self-hosted, full fonts. Lato includes Vietnamese; Poppins is for English display text. */
+@font-face{font-family:Lato;src:url('./assets/lato-regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Lato;src:url('./assets/lato-bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:Lato;src:url('./assets/lato-black.woff2') format('woff2');font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:Lato;src:url('./assets/lato-italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:Poppins;src:url('./assets/poppins-extrabold.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:Poppins;src:url('./assets/poppins-extrabold-italic.woff2') format('woff2');font-weight:800;font-style:italic;font-display:swap}

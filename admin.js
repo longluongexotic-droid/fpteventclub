@@ -130,11 +130,11 @@ async function fetchAllPages(createQuery) {
 function eventTags(event) {
   const tags = node('div', 'admin-tags');
   tags.append(node('span', `admin-tag${event.is_published ? ' is-live' : ''}`,
-    event.is_published ? 'CÔNG KHAI' : 'BẢN NHÁP'));
+    event.is_published ? 'Công khai' : 'Bản nháp'));
   if (event.is_recruiting) {
     tags.append(node('span', 'admin-tag is-open',
       new Date(event.application_deadline).getTime() > Date.now()
-        ? 'ĐANG TUYỂN' : 'HẾT HẠN TUYỂN'));
+        ? 'Đang tuyển' : 'Hết hạn tuyển'));
   }
   return tags;
 }
@@ -149,8 +149,8 @@ function renderEvents() {
   const empty = $('[data-admin-events-empty]');
   empty.hidden = visible.length !== 0;
   empty.textContent = state.events.length
-    ? 'Không tìm thấy sự kiện phù hợp.' : 'Chưa có sự kiện nào.';
-  $('[data-admin-events-count]').textContent = `${state.events.length} sự kiện trong cơ sở dữ liệu`;
+    ? 'Không tìm thấy sự kiện phù hợp.' : 'Chưa có sự kiện nào. Thêm sự kiện đầu tiên để bắt đầu nhé.';
+  $('[data-admin-events-count]').textContent = `${state.events.length} sự kiện trong kho FEV`;
 
   for (const event of visible) {
     const card = node('article', 'admin-event-card');
@@ -171,11 +171,11 @@ function renderEvents() {
       card.append(node('p', 'admin-card-description', summary));
     }
     const actions = node('div', 'admin-card-actions');
-    const edit = node('button', '', 'SỬA SỰ KIỆN');
+    const edit = node('button', '', 'Sửa sự kiện');
     edit.type = 'button';
     edit.setAttribute('aria-label', `Sửa sự kiện ${event.title}`);
     edit.addEventListener('click', () => openEditEvent(event));
-    const remove = node('button', 'admin-danger', 'XÓA');
+    const remove = node('button', 'admin-danger', 'Xóa');
     remove.type = 'button';
     remove.setAttribute('aria-label', `Xóa sự kiện ${event.title}`);
     remove.addEventListener('click', () => deleteEvent(event, remove));
@@ -240,7 +240,7 @@ function renderApplications() {
   const empty = $('[data-admin-applications-empty]');
   empty.hidden = visible.length !== 0;
   empty.textContent = state.applications.length
-    ? 'Không tìm thấy đơn ứng tuyển phù hợp.' : 'Chưa có đơn ứng tuyển nào.';
+    ? 'Không tìm thấy đơn ứng tuyển phù hợp.' : 'Chưa có đơn ứng tuyển. Khi thành viên gửi đơn, bạn sẽ thấy ở đây.';
   $('[data-admin-applications-count]').textContent = `${state.applications.length} đơn ứng tuyển`;
 
   for (const application of visible) {
@@ -258,7 +258,7 @@ function renderApplications() {
       node('span', '', application.phone));
     const portfolio = safeHttpsUrl(application.cv_portfolio_url);
     if (portfolio) {
-      const link = node('a', '', 'XEM CV / PORTFOLIO ↗');
+      const link = node('a', '', 'Xem CV / Portfolio ↗');
       link.href = portfolio;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
@@ -277,13 +277,13 @@ function renderApplications() {
     }
     select.value = application.status;
     label.append(select);
-    const save = node('button', '', 'LƯU TRẠNG THÁI');
+    const save = node('button', '', 'Lưu trạng thái');
     save.type = 'button';
     save.disabled = true;
     select.addEventListener('change', () => {
       save.disabled = select.value === application.status;
     });
-    const remove = node('button', 'admin-danger', 'XÓA ĐƠN');
+    const remove = node('button', 'admin-danger', 'Xóa đơn');
     remove.type = 'button';
     const feedback = node('p', 'member-form-status admin-item-status');
     feedback.setAttribute('role', 'status');
@@ -407,7 +407,7 @@ async function openEditEvent(event) {
   $('#admin-link-input').disabled = true;
   $('[data-event-save]').disabled = true;
   showStatus('[data-event-form-status]');
-  showStatus('[data-event-link-status]', 'Đang tải link đăng ký được bảo vệ…');
+  showStatus('[data-event-link-status]', 'Đang tải link đăng ký dành cho thành viên…');
   showEventDialog();
   const { data, error } = await supabase.rpc('fev_event_registration_link',
     { p_event_id: event.id });
@@ -488,7 +488,7 @@ eventForm?.addEventListener('submit', async (event) => {
   }
   closeEventDialog();
   await loadEvents();
-  showStatus('[data-admin-events-status]', 'Đã lưu sự kiện.', 'success');
+  showStatus('[data-admin-events-status]', 'Đã lưu sự kiện. Xong một việc rồi nhé!', 'success');
 });
 
 async function deleteEvent(event, button) {

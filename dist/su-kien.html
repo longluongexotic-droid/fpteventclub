@@ -4,24 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#100d14" />
-    <meta name="description" content="Khám phá kho sự kiện của FPT Event Club theo từng năm từ 2022 đến 2026." />
+    <meta name="description" content="Cùng FEV xem lại những sự kiện từ 2022 đến 2026. Tìm theo tên, chọn năm và lật lại chuyện hậu trường." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:site_name" content="FPT Event Club" />
-    <meta property="og:title" content="Các sự kiện gần đây — FPT Event Club" />
-    <meta property="og:description" content="Những dấu ấn sự kiện của FEV từ năm 2022 đến 2026." />
+    <meta property="og:title" content="Chuyện sự kiện — FPT Event Club" />
+    <meta property="og:description" content="Sân khấu đã dọn, kỷ niệm vẫn còn. Xem lại những sự kiện FEV đã cùng nhau thực hiện từ 2022 đến 2026." />
     <meta property="og:image" content="https://fpteventclub.io.vn/assets/cover-k22.jpg" />
     <meta property="og:url" content="https://fpteventclub.io.vn/su-kien.html" />
     <link rel="canonical" href="https://fpteventclub.io.vn/su-kien.html" />
     <link rel="icon" href="./assets/fev-logo.png" type="image/png" />
-    <link rel="preload" href="./assets/montserrat.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="./styles.css?v=20260916" />
+    <link rel="preload" href="./assets/lato-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./fonts.css?v=20261102" />
+    <link rel="stylesheet" href="./styles.css?v=20261102" />
     <script src="./app.js?v=20260916" defer></script>
     <link rel="stylesheet" href="./member.css?v=20261001-supabase1" />
     <link rel="stylesheet" href="./events.css" />
-    <script type="module" src="./member.js"></script>
-    <script type="module" src="./events.js"></script>
-    <title>Các sự kiện gần đây — FPT Event Club</title>
+    <script type="module" src="./member.js?v=20261102"></script>
+    <script type="module" src="./events.js?v=20261102"></script>
+    <title>Chuyện sự kiện — FPT Event Club</title>
+    <link rel="stylesheet" href="./theme.css?v=20261102" />
   </head>
   <body class="events-page">
     <a class="skip-link" href="#noi-dung">Đến nội dung chính</a>
@@ -33,15 +35,15 @@
       </a>
       <div class="header-right">
         <div class="member-access" data-member-access>
-          <a class="member-login" href="./dang-nhap.html" data-member-login><span class="member-icon" aria-hidden="true"></span><span>ĐĂNG NHẬP</span></a>
+          <a class="member-login" href="./dang-nhap.html" data-member-login><span class="member-icon" aria-hidden="true"></span><span>Đăng nhập</span></a>
           <details class="member-account" data-member-account hidden>
             <summary><span class="member-icon" aria-hidden="true"></span><span data-member-name>Tài khoản</span></summary>
-            <div class="member-account-panel"><p data-member-email></p><a href="./tuyen-ban-to-chuc.html">Sự kiện tuyển Ban Tổ chức ↗</a><button type="button" data-member-logout>Đăng xuất</button><p class="member-account-error" data-member-account-error role="status"></p></div>
+            <div class="member-account-panel"><p data-member-email></p><a href="./tuyen-ban-to-chuc.html">Tuyển Ban Tổ chức ↗</a><button type="button" data-member-logout>Đăng xuất</button><p class="member-account-error" data-member-account-error role="status"></p></div>
           </details>
         </div>
-        <a class="header-contact" href="./#ket-noi">CÙNG TẠO DẤU ẤN <span aria-hidden="true">↗</span></a>
+        <a class="header-contact" href="./#ket-noi">Trò chuyện với FEV <span aria-hidden="true">↗</span></a>
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="site-menu">
-          <span class="menu-label">KHÁM PHÁ</span>
+          <span class="menu-label">Menu</span>
           <span class="menu-lines" aria-hidden="true"><i></i><i></i></span>
         </button>
       </div>
@@ -50,10 +52,10 @@
     <nav class="site-menu" id="site-menu" aria-label="Điều hướng chính" hidden>
       <div class="menu-inner">
         <p class="eyebrow"><span class="square"></span> KHÔNG GIAN FEV</p>
-        <a class="menu-link" href="./"><span>01</span> Tổng quan FEV <span aria-hidden="true">↗</span></a>
-        <a class="menu-link" href="./#hanh-trinh"><span>02</span> Thế hệ tiếp nối <span aria-hidden="true">↗</span></a>
-        <a class="menu-link is-active" href="./su-kien.html" aria-current="page"><span>03</span> Các sự kiện gần đây <span aria-hidden="true">↗</span></a>
-        <a class="menu-link menu-link-recruitment" href="./tuyen-ban-to-chuc.html"><span>04</span> Các sự kiện đang tuyển Ban Tổ chức <span aria-hidden="true">↗</span></a>
+        <a class="menu-link" href="./"><span>01</span> Về FEV <span aria-hidden="true">↗</span></a>
+        <a class="menu-link" href="./#hanh-trinh"><span>02</span> Các thế hệ FEV <span aria-hidden="true">↗</span></a>
+        <a class="menu-link is-active" href="./su-kien.html" aria-current="page"><span>03</span> Sự kiện <span aria-hidden="true">↗</span></a>
+        <a class="menu-link menu-link-recruitment" href="./tuyen-ban-to-chuc.html"><span>04</span> Tuyển Ban Tổ chức <span aria-hidden="true">↗</span></a>
         <div class="menu-footer"><span>THE WAY WE WENT.</span><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">FACEBOOK ↗</a><a href="mailto:fpteventclub@gmail.com">EMAIL ↗</a></div>
       </div>
     </nav>
@@ -62,27 +64,27 @@
       <section class="events-hero" id="trang-su-kien" aria-labelledby="events-title">
         <div class="events-hero-mark" data-events-hero-count aria-hidden="true">—</div>
         <div class="section-shell events-hero-inner">
-          <p class="eyebrow"><span class="square purple"></span> FEV / EVENT ARCHIVE</p>
-          <h1 id="events-title">CÁC SỰ KIỆN<br /><em>GẦN ĐÂY.</em></h1>
+          <p class="eyebrow"><span class="square purple"></span> FEV / CHUYỆN SỰ KIỆN</p>
+          <h1 id="events-title">Chuyện<br /><em>sự kiện.</em></h1>
           <div class="events-hero-bottom">
-            <p>Những dấu ấn được tạo nên bởi nhiều thế hệ FEV — từ trải nghiệm sinh viên, hoạt động nội bộ đến các dự án cộng đồng.</p>
-            <div class="events-range"><strong>2022—2026</strong><span data-events-total-label>ĐANG TẢI DỮ LIỆU</span></div>
+            <p>Sân khấu đã dọn, kỷ niệm vẫn còn. Đây là những sự kiện tụi mình đã cùng nhau thực hiện, từ buổi gặp mặt trong nhà đến những ngày hội đông vui.</p>
+            <div class="events-range"><strong>2022—2026</strong><span data-events-total-label>Đang tải sự kiện</span></div>
           </div>
         </div>
       </section>
 
       <section class="events-archive section-shell" aria-labelledby="archive-title">
         <div class="section-topline">
-          <p class="eyebrow" id="archive-title"><span class="square red"></span> KHÁM PHÁ THEO NĂM</p>
-          <p class="eyebrow small-link">DỮ LIỆU SỰ KIỆN FEV</p>
+          <p class="eyebrow" id="archive-title"><span class="square red"></span> LẬT LẠI TỪNG NĂM</p>
+          <p class="eyebrow small-link">TÌM LẠI MỘT KỶ NIỆM</p>
         </div>
         <div class="events-tools">
           <label class="events-tool" for="events-search">
-            <span>TÌM SỰ KIỆN</span>
-            <input id="events-search" type="search" placeholder="Nhập tên sự kiện..." autocomplete="off" />
+            <span>Tên sự kiện</span>
+            <input id="events-search" type="search" placeholder="Bạn đang tìm sự kiện nào?" autocomplete="off" />
           </label>
           <label class="events-tool" for="events-category">
-            <span>LOẠI SỰ KIỆN</span>
+            <span>Loại sự kiện</span>
             <select id="events-category">
               <option value="">Tất cả loại sự kiện</option>
               <option value="Nội bộ">Nội bộ</option>
@@ -92,38 +94,38 @@
           </label>
         </div>
         <div class="year-switcher" aria-label="Chọn năm sự kiện">
-          <button class="year-filter" type="button" data-year-filter="all" aria-pressed="false"><span>TẤT CẢ</span><small>— SỰ KIỆN</small></button>
-          <button class="year-filter is-active" type="button" data-year-filter="2026" aria-pressed="true"><span>2026</span><small>— SỰ KIỆN</small></button>
-          <button class="year-filter" type="button" data-year-filter="2025" aria-pressed="false"><span>2025</span><small>— SỰ KIỆN</small></button>
-          <button class="year-filter" type="button" data-year-filter="2024" aria-pressed="false"><span>2024</span><small>— SỰ KIỆN</small></button>
-          <button class="year-filter" type="button" data-year-filter="2023" aria-pressed="false"><span>2023</span><small>— SỰ KIỆN</small></button>
-          <button class="year-filter" type="button" data-year-filter="2022" aria-pressed="false"><span>2022</span><small>— SỰ KIỆN</small></button>
+          <button class="year-filter" type="button" data-year-filter="all" aria-pressed="false"><span>Tất cả</span><small>— sự kiện</small></button>
+          <button class="year-filter is-active" type="button" data-year-filter="2026" aria-pressed="true"><span>2026</span><small>— sự kiện</small></button>
+          <button class="year-filter" type="button" data-year-filter="2025" aria-pressed="false"><span>2025</span><small>— sự kiện</small></button>
+          <button class="year-filter" type="button" data-year-filter="2024" aria-pressed="false"><span>2024</span><small>— sự kiện</small></button>
+          <button class="year-filter" type="button" data-year-filter="2023" aria-pressed="false"><span>2023</span><small>— sự kiện</small></button>
+          <button class="year-filter" type="button" data-year-filter="2022" aria-pressed="false"><span>2022</span><small>— sự kiện</small></button>
         </div>
-        <p class="events-status" id="events-status" role="status" aria-live="polite">Đang tải kho sự kiện...</p>
-        <button class="events-retry" id="events-retry" type="button" hidden>THỬ TẢI LẠI ↗</button>
+        <p class="events-status" id="events-status" role="status" aria-live="polite">Đang mở kho sự kiện…</p>
+        <button class="events-retry" id="events-retry" type="button" hidden>Thử tải lại ↗</button>
         <section class="events-year" id="ket-qua-su-kien" aria-labelledby="events-results-title" hidden>
           <div class="events-year-heading">
             <p class="events-year-number" data-events-year-number aria-hidden="true">2026</p>
-            <div><p class="eyebrow"><span class="square purple"></span> KHO SỰ KIỆN</p><h2 id="events-results-title" data-events-results-title>0 DẤU ẤN SỰ KIỆN</h2></div>
+            <div><p class="eyebrow"><span class="square purple"></span> CÁC SỰ KIỆN CỦA FEV</p><h2 id="events-results-title" data-events-results-title>0 sự kiện</h2></div>
           </div>
           <ol class="event-list" id="events-list"></ol>
         </section>
-        <p class="events-empty" id="events-empty" hidden>Chưa có sự kiện phù hợp với bộ lọc này.</p>
+        <p class="events-empty" id="events-empty" hidden>Chưa thấy sự kiện bạn tìm. Bạn thử đổi tên, năm hoặc loại sự kiện nhé.</p>
       </section>
 
       <section class="events-cta">
         <div class="section-shell events-cta-inner">
           <p class="eyebrow"><span class="square"></span> THE WAY WE WENT</p>
-          <h2>MỖI SỰ KIỆN.<br /><em>MỘT DẤU ẤN.</em></h2>
-          <a href="./#hanh-trinh">GẶP THẾ HỆ TIẾP NỐI <span aria-hidden="true">↗</span></a>
+          <h2>Xem sự kiện rồi.<br /><em>Gặp tụi mình nhé?</em></h2>
+          <a href="./#hanh-trinh">Gặp các thế hệ FEV <span aria-hidden="true">↗</span></a>
         </div>
       </section>
     </main>
 
     <footer class="site-footer section-shell">
-      <div class="footer-top"><a class="brand" href="./" aria-label="Về trang chủ"><img src="./assets/fev-logo.png" width="76" height="44" alt="Logo FEV" loading="lazy" /><span class="brand-label">FPT EVENT CLUB<span>THE WAY WE WENT</span></span></a><div class="footer-socials"><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">FACEBOOK ↗</a><a href="https://www.instagram.com/fev_thewaywewent/" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗</a><a href="mailto:fpteventclub@gmail.com">EMAIL ↗</a><a href="./chinh-sach-quyen-rieng-tu.html">QUYỀN RIÊNG TƯ</a></div></div>
+      <div class="footer-top"><a class="brand" href="./" aria-label="Về trang chủ"><img src="./assets/fev-logo.png" width="76" height="44" alt="Logo FEV" loading="lazy" /><span class="brand-label">FPT EVENT CLUB<span>THE WAY WE WENT</span></span></a><div class="footer-socials"><a href="https://www.facebook.com/FPTEventClub/" target="_blank" rel="noopener noreferrer">FACEBOOK ↗</a><a href="https://www.instagram.com/fev_thewaywewent/" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗</a><a href="mailto:fpteventclub@gmail.com">EMAIL ↗</a><a href="./chinh-sach-quyen-rieng-tu.html">Quyền riêng tư</a></div></div>
       <div class="footer-wordmark" aria-hidden="true">MADE OF MOMENTS<span>✳</span></div>
-      <div class="footer-bottom"><span>© <span id="year">2026</span> FPT EVENT CLUB.</span><span><span data-events-footer-count>—</span> DẤU ẤN. MỘT HÀNH TRÌNH.</span><a href="#trang-su-kien">LÊN ĐẦU TRANG ↑</a></div>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> FPT EVENT CLUB.</span><span><span data-events-footer-count>—</span> sự kiện. Cả kho kỷ niệm.</span><a href="#trang-su-kien">Lên đầu trang ↑</a></div>
     </footer>
   </body>
 </html>
